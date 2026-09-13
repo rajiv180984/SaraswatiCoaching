@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/surface_minimal">
+
+    <!-- ── Mode toggle: Q&A | Live Query ── -->
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggle_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_m"
+        android:layout_marginTop="@dimen/space_m"
+        android:layout_marginBottom="@dimen/space_s"
+        app:singleSelection="true"
+        app:selectionRequired="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_qa"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_m"
+            android:layout_weight="1"
+            android:text="@string/doubt_tab_qa" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_live"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_m"
+            android:layout_weight="1"
+            android:text="@string/doubt_tab_live" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <!-- ── Content area (Q&A and Live Query share this FrameLayout) ── -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- ═══════════ Q&A SECTION ═══════════ -->
+        <FrameLayout
+            android:id="@+id/qa_section"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/doubts_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/space_m"
+                android:paddingTop="@dimen/space_xs"
+                android:paddingBottom="88dp"
+                android:clipToPadding="false" />
+
+            <!-- Empty state — shown when no doubts exist -->
+            <LinearLayout
+                android:id="@+id/empty_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/doubt_empty_title"
+                    android:textAppearance="@style/TextAppearance.Saraswati.Title"
+                    android:textColor="@color/text_secondary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:text="@string/doubt_empty_hint"
+                    android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                    android:textColor="@color/text_tertiary"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- FAB — post new doubt -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/space_l"
+                android:src="@drawable/ic_add"
+                android:contentDescription="@string/doubt_post_title"
+                app:backgroundTint="@color/reliance_blue"
+                app:tint="@color/white" />
+        </FrameLayout>
+
+        <!-- ═══════════ LIVE QUERY SECTION ═══════════ -->
+        <LinearLayout
+            android:id="@+id/live_section"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- AI header bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/space_m"
+                android:paddingVertical="@dimen/space_s"
+                android:background="@color/surface_subtle"
+                android:elevation="@dimen/elevation_low">
+
+                <!-- Avatar -->
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_brand_circle"
+                    android:text="AI"
+                    android:textColor="@color/reliance_blue"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/space_s"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/doubt_ai_name"
+                        android:textAppearance="@style/TextAppearance.Saraswati.Title"
+                        android:textColor="@color/text_primary" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:layout_width="6dp"
+                            android:layout_height="6dp"
+                            android:background="@drawable/bg_live_dot"
+                            android:layout_marginEnd="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/doubt_ai_online"
+                            android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                            android:textColor="@color/positive" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Chat messages -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chat_rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingVertical="@dimen/space_s"
+                android:clipToPadding="false" />
+
+            <!-- Message input bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/space_m"
+                android:paddingVertical="@dimen/space_s"
+                android:background="@color/surface_subtle"
+                android:elevation="@dimen/elevation_low">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Saraswati.TextInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/doubt_chat_hint">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/chat_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:maxLines="4"
+                        android:imeOptions="actionSend" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/send_btn"
+                    style="@style/Saraswati.Button.Primary"
+                    android:layout_width="@dimen/button_height_m"
+                    android:layout_height="@dimen/button_height_m"
+                    android:layout_marginStart="@dimen/space_s"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:icon="@drawable/ic_send"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:cornerRadius="@dimen/radius_component" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+</LinearLayout>

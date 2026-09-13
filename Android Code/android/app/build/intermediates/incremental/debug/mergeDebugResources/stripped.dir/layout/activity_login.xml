@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/surface_minimal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/space_l"
+        android:paddingTop="@dimen/space_xxxl"
+        android:paddingBottom="@dimen/space_xl">
+
+        <!-- Brand mark -->
+        <View
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_brand_circle"
+            android:layout_marginBottom="@dimen/space_l" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_brand_title"
+            android:textAppearance="@style/TextAppearance.Saraswati.Headline" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_brand_subtitle"
+            android:textAppearance="@style/TextAppearance.Saraswati.BodySecondary"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:layout_marginBottom="@dimen/space_xxl" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_welcome"
+            android:textAppearance="@style/TextAppearance.Saraswati.Title"
+            android:textSize="@dimen/text_title_l" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_subtitle"
+            android:textAppearance="@style/TextAppearance.Saraswati.BodySecondary"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:layout_marginBottom="@dimen/space_l" />
+
+        <!-- Email -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_layout"
+            style="@style/Saraswati.TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_email_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_input"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.Saraswati.Body"
+                android:textSize="@dimen/text_body_l" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_layout"
+            style="@style/Saraswati.TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m"
+            app:endIconMode="password_toggle"
+            android:hint="@string/login_password_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_input"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:inputType="textPassword"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.Saraswati.Body"
+                android:textSize="@dimen/text_body_l" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/space_s"
+            android:padding="@dimen/space_xxs"
+            android:text="@string/login_forgot_password"
+            android:textColor="@color/reliance_blue"
+            android:textAppearance="@style/TextAppearance.Saraswati.Label" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/login_button"
+            style="@style/Saraswati.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_l"
+            android:layout_marginTop="@dimen/space_l"
+            android:text="@string/login_sign_in" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_l"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_no_account"
+                android:textAppearance="@style/TextAppearance.Saraswati.BodySecondary" />
+
+            <TextView
+                android:id="@+id/register_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_xxs"
+                android:padding="@dimen/space_xxs"
+                android:text="@string/login_create_account"
+                android:textColor="@color/reliance_blue"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.Saraswati.Label" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_xl"
+            android:text="@string/login_help"
+            android:textAppearance="@style/TextAppearance.Saraswati.Label"
+            tools:ignore="TextContrastCheck" />
+
+    </LinearLayout>
+</ScrollView>

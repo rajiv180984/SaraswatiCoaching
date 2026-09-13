@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/reliance_blue">
+
+    <!-- ── Centre brand block ── -->
+    <LinearLayout
+        android:id="@+id/center_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Logo circle -->
+        <FrameLayout
+            android:id="@+id/fl_logo"
+            android:layout_width="116dp"
+            android:layout_height="116dp"
+            android:background="@drawable/bg_white_circle"
+            android:elevation="8dp">
+
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_splash_logo" />
+        </FrameLayout>
+
+        <!-- App name -->
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/jiotype_var"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.02" />
+
+        <!-- Saffron accent line -->
+        <View
+            android:id="@+id/accent_line"
+            android:layout_width="48dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/saffron"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Tagline -->
+        <TextView
+            android:id="@+id/tv_tagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/splash_tagline"
+            android:textColor="#CCFFFFFF"
+            android:textSize="15sp"
+            android:letterSpacing="0.04" />
+
+    </LinearLayout>
+
+    <!-- ── Bottom footer ── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="36dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/splash_footer"
+            android:textColor="#80FFFFFF"
+            android:textSize="12sp"
+            android:letterSpacing="0.05" />
+
+    </LinearLayout>
+
+</RelativeLayout>

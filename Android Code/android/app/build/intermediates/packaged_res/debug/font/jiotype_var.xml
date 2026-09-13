@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Placeholder font family. Falls back to the system default sans-serif.
+    Replace this file with the actual JioType font files when available:
+      res/font/jiotype_regular.ttf
+      res/font/jiotype_bold.ttf
+    Then add <font> entries here referencing those files.
+-->
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+</font-family>

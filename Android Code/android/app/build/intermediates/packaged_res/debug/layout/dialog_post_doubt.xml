@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/space_l">
+
+    <!-- Dialog title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/doubt_post_title"
+        android:textAppearance="@style/TextAppearance.Saraswati.Headline"
+        android:layout_marginBottom="@dimen/space_m" />
+
+    <!-- Subject label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/doubt_subject_label"
+        android:textAppearance="@style/TextAppearance.Saraswati.Label"
+        android:textColor="@color/text_primary"
+        android:layout_marginBottom="@dimen/space_xxs" />
+
+    <!-- Subject spinner -->
+    <Spinner
+        android:id="@+id/subject_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:background="@drawable/bg_otp_box"
+        android:paddingHorizontal="@dimen/space_s"
+        android:spinnerMode="dropdown" />
+
+    <!-- Chapter label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/doubt_chapter_label"
+        android:textAppearance="@style/TextAppearance.Saraswati.Label"
+        android:textColor="@color/text_primary"
+        android:layout_marginTop="@dimen/space_m"
+        android:layout_marginBottom="@dimen/space_xxs" />
+
+    <!-- Chapter input -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Saraswati.TextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/doubt_chapter_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/chapter_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Question label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/doubt_question_label"
+        android:textAppearance="@style/TextAppearance.Saraswati.Label"
+        android:textColor="@color/text_primary"
+        android:layout_marginTop="@dimen/space_m"
+        android:layout_marginBottom="@dimen/space_xxs" />
+
+    <!-- Question input -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Saraswati.TextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/doubt_question_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/question_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="3"
+            android:maxLines="6"
+            android:gravity="top" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

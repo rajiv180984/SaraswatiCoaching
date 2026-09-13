@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Saraswati.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_m"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/card_padding">
+
+        <!-- Row 1: Subject dot · Subject name · Status badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <View
+                android:id="@+id/subject_dot"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/bg_subject_dot" />
+
+            <TextView
+                android:id="@+id/subject_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/space_xs"
+                android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                android:textColor="@color/text_secondary"
+                tools:text="Mathematics" />
+
+            <TextView
+                android:id="@+id/status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/space_xs"
+                android:paddingVertical="3dp"
+                android:background="@drawable/bg_badge"
+                android:textSize="@dimen/text_label_s"
+                android:textStyle="bold"
+                tools:text="Online"
+                tools:textColor="@color/reliance_blue" />
+        </LinearLayout>
+
+        <!-- Test title -->
+        <TextView
+            android:id="@+id/test_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:textAppearance="@style/TextAppearance.Saraswati.Title"
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text="Mathematics Chapter 6 Mock Test" />
+
+        <!-- Meta: date · questions · duration -->
+        <TextView
+            android:id="@+id/test_meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:textAppearance="@style/TextAppearance.Saraswati.Label"
+            android:textColor="@color/text_secondary"
+            tools:text="28 May · 30 Q · 60 min" />
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/card_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/stroke_hairline"
+            android:layout_marginTop="@dimen/space_s"
+            android:background="@color/stroke_minimal" />
+
+        <!-- ═══════════ COMPLETED SECTION ═══════════ -->
+        <LinearLayout
+            android:id="@+id/section_completed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- Score progress bar -->
+            <ProgressBar
+                android:id="@+id/score_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:progressTint="@color/reliance_blue"
+                android:progressBackgroundTint="@color/stroke_minimal"
+                tools:progress="72" />
+
+            <!-- Score · Percentile · Rank -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                android:orientation="horizontal">
+
+                <!-- Score -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tests_score"
+                        android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                        android:textColor="@color/text_secondary" />
+
+                    <TextView
+                        android:id="@+id/score_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.Saraswati.Title"
+                        android:textColor="@color/text_primary"
+                        tools:text="88 / 100" />
+                </LinearLayout>
+
+                <!-- Percentile -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tests_percentile"
+                        android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                        android:textColor="@color/text_secondary" />
+
+                    <TextView
+                        android:id="@+id/percentile_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.Saraswati.Title"
+                        android:textColor="@color/positive"
+                        tools:text="91.5" />
+                </LinearLayout>
+
+                <!-- Rank -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tests_rank"
+                        android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                        android:textColor="@color/text_secondary" />
+
+                    <TextView
+                        android:id="@+id/rank_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.Saraswati.Title"
+                        android:textColor="@color/text_primary"
+                        tools:text="6 / 248" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ═══════════ UPCOMING SECTION ═══════════ -->
+        <LinearLayout
+            android:id="@+id/section_upcoming"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/upcoming_hint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                android:textColor="@color/text_tertiary"
+                tools:text="Tap to begin" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/action_button"
+                style="@style/Saraswati.Button.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height_m"
+                android:text="@string/tests_start" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

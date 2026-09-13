@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Profile & Registration -->
+    <group
+        android:id="@+id/group_account"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_profile"
+            android:icon="@drawable/ic_nav_profile"
+            android:title="@string/nav_profile" />
+        <item
+            android:id="@+id/drawer_registration"
+            android:icon="@drawable/ic_registration"
+            android:title="@string/drawer_registration" />
+    </group>
+
+    <!-- Academics -->
+    <group
+        android:id="@+id/group_academics"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_performance"
+            android:icon="@drawable/ic_performance"
+            android:title="@string/drawer_performance" />
+        <item
+            android:id="@+id/drawer_attendance"
+            android:icon="@drawable/ic_attendance"
+            android:title="@string/drawer_attendance" />
+        <item
+            android:id="@+id/drawer_course"
+            android:icon="@drawable/ic_course"
+            android:title="@string/drawer_course" />
+        <item
+            android:id="@+id/drawer_library"
+            android:icon="@drawable/ic_library"
+            android:title="@string/drawer_library" />
+    </group>
+
+    <!-- Administration -->
+    <group
+        android:id="@+id/group_administration"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_payment"
+            android:icon="@drawable/ic_payment"
+            android:title="@string/drawer_payment" />
+        <item
+            android:id="@+id/drawer_teachers"
+            android:icon="@drawable/ic_teachers"
+            android:title="@string/drawer_teachers" />
+    </group>
+
+    <!-- Connect -->
+    <group
+        android:id="@+id/group_connect"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_refer"
+            android:icon="@drawable/ic_refer"
+            android:title="@string/drawer_refer" />
+        <item
+            android:id="@+id/drawer_location"
+            android:icon="@drawable/ic_location"
+            android:title="@string/drawer_location" />
+        <item
+            android:id="@+id/drawer_contact"
+            android:icon="@drawable/ic_contact"
+            android:title="@string/drawer_contact" />
+    </group>
+
+    <!-- Info & Support -->
+    <group
+        android:id="@+id/group_info"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_about"
+            android:icon="@drawable/ic_about"
+            android:title="@string/drawer_about" />
+        <item
+            android:id="@+id/drawer_grievance"
+            android:icon="@drawable/ic_grievance"
+            android:title="@string/drawer_grievance" />
+        <item
+            android:id="@+id/drawer_feedback"
+            android:icon="@drawable/ic_feedback"
+            android:title="@string/drawer_feedback" />
+    </group>
+
+    <!-- Logout -->
+    <group
+        android:id="@+id/group_actions"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/drawer_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/drawer_logout" />
+    </group>
+
+</menu>

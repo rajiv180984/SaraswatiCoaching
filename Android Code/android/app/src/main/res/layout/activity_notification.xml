@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appbar_height"
+        android:background="@color/reliance_blue"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@color/white"
+        app:title="Notifications"
+        app:titleTextColor="@color/white"
+        app:subtitleTextColor="#B3FFFFFF" />
+
+    <!-- Unread count banner -->
+    <TextView
+        android:id="@+id/tv_unread_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/reliance_blue_light"
+        android:paddingStart="@dimen/space_m"
+        android:paddingTop="@dimen/space_xs"
+        android:paddingEnd="@dimen/space_m"
+        android:paddingBottom="@dimen/space_xs"
+        android:textColor="@color/reliance_blue"
+        android:textSize="@dimen/text_body_s"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/stroke_minimal" />
+
+    <!-- Notification list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/surface_minimal"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/space_m" />
+
+    <!-- Empty state (shown when all notifications are read or list is empty) -->
+    <LinearLayout
+        android:id="@+id/empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/space_xl"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:alpha="0.35"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_notification"
+            android:tint="@color/reliance_blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m"
+            android:text="All caught up!"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_title_m"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:gravity="center"
+            android:text="You have no new notifications.\nCheck back later."
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_body_m" />
+    </LinearLayout>
+
+</LinearLayout>

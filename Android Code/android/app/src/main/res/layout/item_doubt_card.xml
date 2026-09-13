@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Saraswati.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_m"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/card_padding">
+
+        <!-- Row 1: subject dot · subject label · status badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <View
+                android:id="@+id/subject_dot"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/bg_subject_dot" />
+
+            <TextView
+                android:id="@+id/subject_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/space_xs"
+                android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                android:textColor="@color/text_secondary"
+                tools:text="Mathematics" />
+
+            <TextView
+                android:id="@+id/status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/space_xs"
+                android:paddingVertical="3dp"
+                android:background="@drawable/bg_badge"
+                android:textSize="@dimen/text_label_s"
+                android:textStyle="bold"
+                tools:text="Answered" />
+        </LinearLayout>
+
+        <!-- Question text -->
+        <TextView
+            android:id="@+id/question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:textAppearance="@style/TextAppearance.Saraswati.Title"
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text="How do I solve a quadratic equation using the discriminant method?" />
+
+        <!-- Chapter · posted time -->
+        <TextView
+            android:id="@+id/doubt_meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:textAppearance="@style/TextAppearance.Saraswati.Label"
+            android:textColor="@color/text_secondary"
+            tools:text="Chapter 4  ·  2 hours ago" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/stroke_hairline"
+            android:layout_marginTop="@dimen/space_s"
+            android:background="@color/stroke_minimal" />
+
+        <!-- ANSWERED state -->
+        <LinearLayout
+            android:id="@+id/section_answered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/answered_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                android:textColor="@color/positive"
+                tools:text="Answered by Mr. Kumar" />
+
+            <TextView
+                android:id="@+id/answer_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xxs"
+                android:textAppearance="@style/TextAppearance.Saraswati.Body"
+                android:textColor="@color/text_secondary"
+                android:maxLines="4"
+                android:ellipsize="end"
+                tools:text="Use the formula x = (−b ± √(b²−4ac)) / 2a. First compute the discriminant D = b²−4ac. If D > 0, two real roots exist." />
+        </LinearLayout>
+
+        <!-- PENDING state -->
+        <TextView
+            android:id="@+id/section_pending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s"
+            android:textAppearance="@style/TextAppearance.Saraswati.Label"
+            android:textColor="@color/text_tertiary"
+            android:textStyle="italic"
+            android:text="@string/doubt_pending_hint"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

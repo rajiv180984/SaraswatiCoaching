@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Blue bubble — top-right corner is squared to point toward the right -->
+    <corners
+        android:topLeftRadius="@dimen/radius_component_large"
+        android:topRightRadius="4dp"
+        android:bottomLeftRadius="@dimen/radius_component_large"
+        android:bottomRightRadius="@dimen/radius_component_large" />
+    <solid android:color="@color/reliance_blue" />
+</shape>

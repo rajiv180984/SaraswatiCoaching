@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Typing indicator — shows while AI is composing a response -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="start"
+    android:paddingHorizontal="@dimen/space_m"
+    android:paddingVertical="@dimen/space_xxs">
+
+    <!-- AI avatar -->
+    <TextView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:background="@drawable/bg_brand_circle"
+        android:text="AI"
+        android:textColor="@color/reliance_blue"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="@dimen/space_xs"
+        android:layout_marginTop="2dp" />
+
+    <!-- Typing bubble -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_chat_system"
+        android:paddingHorizontal="@dimen/space_m"
+        android:paddingVertical="@dimen/space_s">
+
+        <TextView
+            android:id="@+id/typing_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/doubt_ai_typing"
+            android:textColor="@color/text_secondary"
+            android:textStyle="italic"
+            android:textSize="@dimen/text_body_m" />
+    </LinearLayout>
+
+</LinearLayout>

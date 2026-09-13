@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============ Spacing scale (JDS) ============ -->
+    <dimen name="space_xxs">4dp</dimen>
+    <dimen name="space_xs">8dp</dimen>
+    <dimen name="space_s">12dp</dimen>
+    <dimen name="space_m">16dp</dimen>
+    <dimen name="space_l">24dp</dimen>
+    <dimen name="space_xl">32dp</dimen>
+    <dimen name="space_xxl">48dp</dimen>
+    <dimen name="space_xxxl">64dp</dimen>
+
+    <!-- ============ Corner radii ============ -->
+    <dimen name="radius_component">8dp</dimen>
+    <dimen name="radius_component_large">12dp</dimen>
+    <dimen name="radius_pattern">16dp</dimen>
+    <dimen name="radius_layout">24dp</dimen>
+    <dimen name="radius_pill">999dp</dimen>
+
+    <!-- ============ Component heights ============ -->
+    <dimen name="button_height_xs">24dp</dimen>
+    <dimen name="button_height_s">32dp</dimen>
+    <dimen name="button_height_m">40dp</dimen>
+    <dimen name="button_height_l">48dp</dimen>
+    <dimen name="button_height_xl">56dp</dimen>
+
+    <dimen name="input_height">48dp</dimen>
+    <dimen name="appbar_height">56dp</dimen>
+    <dimen name="bottom_nav_height">72dp</dimen>
+    <dimen name="touch_target_min">44dp</dimen>
+
+    <!-- ============ Borders / strokes ============ -->
+    <dimen name="stroke_hairline">1dp</dimen>
+    <dimen name="stroke_emphasized">2dp</dimen>
+
+    <!-- ============ Elevation ============ -->
+    <dimen name="elevation_low">1dp</dimen>
+    <dimen name="elevation_medium">4dp</dimen>
+    <dimen name="elevation_high">12dp</dimen>
+
+    <!-- ============ Type sizes ============ -->
+    <dimen name="text_display_l">48sp</dimen>
+    <dimen name="text_display_m">40sp</dimen>
+    <dimen name="text_display_s">32sp</dimen>
+    <dimen name="text_headline_l">28sp</dimen>
+    <dimen name="text_headline_m">24sp</dimen>
+    <dimen name="text_headline_s">20sp</dimen>
+    <dimen name="text_title_l">18sp</dimen>
+    <dimen name="text_title_m">16sp</dimen>
+    <dimen name="text_title_s">14sp</dimen>
+    <dimen name="text_body_l">16sp</dimen>
+    <dimen name="text_body_m">14sp</dimen>
+    <dimen name="text_body_s">12sp</dimen>
+    <dimen name="text_label_l">14sp</dimen>
+    <dimen name="text_label_m">12sp</dimen>
+    <dimen name="text_label_s">10sp</dimen>
+
+    <!-- ============ Cards ============ -->
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_padding_large">20dp</dimen>
+    <dimen name="card_radius">16dp</dimen>
+
+</resources>

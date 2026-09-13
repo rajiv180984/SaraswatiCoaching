@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appbar_height"
+        android:background="@color/reliance_blue"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@color/white"
+        app:title="Registration"
+        app:titleTextColor="@color/white" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/surface_minimal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_m">
+
+
+            <!-- ══════════════════════════════════════════
+                 SECTION 1 · Student Personal Details
+                 ══════════════════════════════════════════ -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_m"
+                app:cardBackgroundColor="@color/surface_subtle"
+                app:cardCornerRadius="@dimen/card_radius"
+                app:cardElevation="@dimen/elevation_low">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding_large">
+
+                    <!-- Section header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/space_s"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:background="@drawable/bg_brand_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Student Personal Details"
+                            android:textColor="@color/reliance_blue"
+                            android:textSize="@dimen/text_title_m"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:background="@color/reliance_blue_light" />
+
+                    <!-- Full Name -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_name"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Full Name *">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="textPersonName|textCapWords" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- DOB + Age -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_dob"
+                            style="@style/Saraswati.TextInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_xs"
+                            android:layout_weight="1.6"
+                            android:hint="Date of Birth *"
+                            app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+                            app:endIconMode="custom">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_dob"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:hint="DD / MM / YYYY"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_age"
+                            style="@style/Saraswati.TextInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="Age">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_age"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:focusable="false"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Gender -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_xxs"
+                        android:text="Gender *"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="@dimen/text_body_s" />
+                    <RadioGroup
+                        android:id="@+id/rg_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:id="@+id/rb_male"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/reliance_blue"
+                            android:text="Male" />
+                        <RadioButton
+                            android:id="@+id/rb_female"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_m"
+                            android:buttonTint="@color/reliance_blue"
+                            android:text="Female" />
+                        <RadioButton
+                            android:id="@+id/rb_other"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_m"
+                            android:buttonTint="@color/reliance_blue"
+                            android:text="Other" />
+                    </RadioGroup>
+
+                    <!-- Student Mobile -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_mobile"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Student Mobile Number">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_mobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            android:maxLength="10" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Email -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_email"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Email Address *">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- ── Login Account sub-header ── -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_xs"
+                        android:background="@color/surface_moderate"
+                        android:paddingStart="@dimen/space_s"
+                        android:paddingTop="@dimen/space_xs"
+                        android:paddingEnd="@dimen/space_s"
+                        android:paddingBottom="@dimen/space_xs"
+                        android:text="Login Account"
+                        android:textColor="@color/text_primary"
+                        android:textSize="@dimen/text_body_l"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:text="Used to sign in to the Saraswati app."
+                        android:textColor="@color/text_tertiary"
+                        android:textSize="@dimen/text_body_s" />
+
+                    <!-- Username -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_username"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Username *">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:maxLength="50" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Password -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_password"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        app:endIconMode="password_toggle"
+                        app:helperText="Min 8 chars with upper, lower, digit &amp; special (@$!%*?&amp;)"
+                        android:hint="Password *">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Confirm Password -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_confirm_password"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        app:endIconMode="password_toggle"
+                        android:hint="Confirm Password *">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_confirm_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Address Line 1 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_address1"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Address Line 1 *">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_address1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPostalAddress|textCapSentences" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Address Line 2 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_address2"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Address Line 2 (Landmark / Area)">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_address2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPostalAddress|textCapSentences" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- City + State -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_city"
+                            style="@style/Saraswati.TextInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="City *">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_city"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textCapWords" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_state"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="State">
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/act_state"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Pincode -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_pincode"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_l"
+                        android:hint="Pincode *">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_pincode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLength="6" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- ── Parent / Guardian sub-header ── -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:background="@color/surface_moderate"
+                        android:paddingStart="@dimen/space_s"
+                        android:paddingTop="@dimen/space_xs"
+                        android:paddingEnd="@dimen/space_s"
+                        android:paddingBottom="@dimen/space_xs"
+                        android:text="Parent / Guardian Details"
+                        android:textColor="@color/text_primary"
+                        android:textSize="@dimen/text_body_l"
+                        android:textStyle="bold" />
+
+                    <!-- Parent Name -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_parent_name"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Parent / Guardian Name *">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_parent_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName|textCapWords" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Relation -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_xxs"
+                        android:text="Relationship *"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="@dimen/text_body_s" />
+                    <RadioGroup
+                        android:id="@+id/rg_relation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:id="@+id/rb_father"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/reliance_blue"
+                            android:checked="true"
+                            android:text="Father" />
+                        <RadioButton
+                            android:id="@+id/rb_mother"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_m"
+                            android:buttonTint="@color/reliance_blue"
+                            android:text="Mother" />
+                        <RadioButton
+                            android:id="@+id/rb_guardian"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_m"
+                            android:buttonTint="@color/reliance_blue"
+                            android:text="Guardian" />
+                    </RadioGroup>
+
+                    <!-- Parent Mobile + Email -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_parent_mobile"
+                            style="@style/Saraswati.TextInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="Parent Mobile *">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_parent_mobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="phone"
+                                android:maxLength="10" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_parent_email"
+                            style="@style/Saraswati.TextInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="Parent Email">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_parent_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textEmailAddress" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Alternate Contact -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_alternate_contact"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Alternate Contact Number">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_alternate_contact"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            android:maxLength="10" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- ══════════════════════════════════════════
+                 SECTION 2 · Academic Details
+                 ══════════════════════════════════════════ -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_m"
+                app:cardBackgroundColor="@color/surface_subtle"
+                app:cardCornerRadius="@dimen/card_radius"
+                app:cardElevation="@dimen/elevation_low">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding_large">
+
+                    <!-- Section header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/space_s"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:background="@drawable/bg_brand_circle"
+                            android:gravity="center"
+                            android:text="2"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Academic Details"
+                            android:textColor="@color/reliance_blue"
+                            android:textSize="@dimen/text_title_m"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:background="@color/reliance_blue_light" />
+
+                    <!-- Applying for Class + Section -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_class"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="Applying for Class *">
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/act_class"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_section"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="Section">
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/act_section"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Stream (Class 11–12 only) -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_stream"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Stream"
+                        android:visibility="gone">
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/act_stream"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Subjects label -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_xs"
+                        android:text="Subjects *"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="@dimen/text_body_s" />
+
+                    <!-- Subject chips (populated dynamically) -->
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/cg_subjects"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        app:chipSpacingHorizontal="@dimen/space_xs"
+                        app:chipSpacingVertical="@dimen/space_xxs" />
+
+                    <!-- ── School Details sub-header ── -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:background="@color/surface_moderate"
+                        android:paddingStart="@dimen/space_s"
+                        android:paddingTop="@dimen/space_xs"
+                        android:paddingEnd="@dimen/space_s"
+                        android:paddingBottom="@dimen/space_xs"
+                        android:text="School Details"
+                        android:textColor="@color/text_primary"
+                        android:textSize="@dimen/text_body_l"
+                        android:textStyle="bold" />
+
+                    <!-- School / Institution Name -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_school"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="School / Institution Name *">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_school"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textCapWords" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Board + School City -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_board"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="Board *">
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/act_board"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_school_city"
+                            style="@style/Saraswati.TextInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="School City">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_school_city"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textCapWords" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- ══════════════════════════════════════════
+                 SECTION 3 · Previous Academic Record
+                 ══════════════════════════════════════════ -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_m"
+                app:cardBackgroundColor="@color/surface_subtle"
+                app:cardCornerRadius="@dimen/card_radius"
+                app:cardElevation="@dimen/elevation_low">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding_large">
+
+                    <!-- Section header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/space_s"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:background="@drawable/bg_brand_circle"
+                            android:gravity="center"
+                            android:text="3"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Previous Academic Record"
+                            android:textColor="@color/reliance_blue"
+                            android:textSize="@dimen/text_title_m"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:background="@color/reliance_blue_light" />
+
+                    <!-- Previous Class (auto) -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_prev_class"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Previous Class (auto-filled)">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_prev_class"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:focusable="false"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Marks Obtained + Max Marks -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_marks_obtained"
+                            style="@style/Saraswati.TextInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="Marks Obtained">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_marks_obtained"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:imeOptions="actionNext" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_max_marks"
+                            style="@style/Saraswati.TextInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="Total Marks (Max)">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_max_marks"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:imeOptions="actionNext" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Percentage (auto) + Rank -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_percentage"
+                            style="@style/Saraswati.TextInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="Percentage % (auto)">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_percentage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:focusable="false"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_rank"
+                            style="@style/Saraswati.TextInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:hint="Rank in Class">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_rank"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Academic Achievements -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_achievements"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Academic Achievements">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_achievements"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:inputType="textMultiLine|textCapSentences"
+                            android:lines="3"
+                            android:maxLines="6"
+                            android:hint="e.g. State Science Olympiad Rank 1, District Topper…" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Extracurricular -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_extracurricular"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Extracurricular Activities">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_extracurricular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:inputType="textMultiLine|textCapSentences"
+                            android:lines="3"
+                            android:maxLines="6"
+                            android:hint="e.g. NCC, Music, Sports, Debate…" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- ══════════════════════════════════════════
+                 SECTION 4 · Reference Details
+                 ══════════════════════════════════════════ -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_l"
+                app:cardBackgroundColor="@color/surface_subtle"
+                app:cardCornerRadius="@dimen/card_radius"
+                app:cardElevation="@dimen/elevation_low">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding_large">
+
+                    <!-- Section header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/space_s"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:background="@drawable/bg_brand_circle"
+                            android:gravity="center"
+                            android:text="4"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Reference Details"
+                            android:textColor="@color/reliance_blue"
+                            android:textSize="@dimen/text_title_m"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:background="@color/reliance_blue_light" />
+
+                    <!-- How did you hear -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_hear_about"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="How did you hear about us?">
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/act_hear_about"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Refer by Teacher Name -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_teacher_name"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_m"
+                        android:hint="Referred by Teacher (Name)">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_teacher_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName|textCapWords" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Teacher Contact -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_teacher_contact"
+                        style="@style/Saraswati.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Teacher Contact Number">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_teacher_contact"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            android:maxLength="10" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- Submit Button -->
+            <Button
+                android:id="@+id/btn_submit"
+                style="@style/Saraswati.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height_xl"
+                android:layout_marginBottom="@dimen/space_s"
+                android:text="Submit Registration" />
+
+            <!-- Required fields note -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_l"
+                android:gravity="center"
+                android:text="* Required fields"
+                android:textColor="@color/text_tertiary"
+                android:textSize="@dimen/text_body_s" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/surface_minimal">
+
+    <!-- Top app bar (blue) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appbar_height"
+        android:background="@color/reliance_blue"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_m">
+
+        <TextView
+            android:id="@+id/close_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="✕"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/space_xs"
+            android:text="@string/demo_test_title"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.Saraswati.Title"
+            android:singleLine="true"
+            android:ellipsize="end" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_s"
+            android:paddingVertical="@dimen/space_xxs"
+            android:background="@drawable/bg_timer_chip">
+            <requestFocus />
+        </View>
+
+        <TextView
+            android:id="@+id/timer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_s"
+            android:paddingVertical="@dimen/space_xxs"
+            android:background="@drawable/bg_timer_chip"
+            android:text="30:00"
+            android:textColor="@color/white"
+            android:fontFamily="@font/jiotype_var"
+            android:textFontWeight="600"
+            android:textSize="@dimen/text_body_l" />
+    </LinearLayout>
+
+    <!-- Main content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_l">
+
+            <!-- Question header row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                    android:textSize="@dimen/text_body_m"
+                    tools:text="Question 1 of 30" />
+
+                <TextView
+                    android:id="@+id/marks_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                    android:textColor="@color/text_secondary"
+                    tools:text="4 marks  ·  −1.00 for wrong" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/question_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:textAppearance="@style/TextAppearance.Saraswati.Title"
+                android:textSize="@dimen/text_title_l"
+                tools:text="If 2x + 3 = 11, what is the value of x?" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/options_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_l"
+                android:nestedScrollingEnabled="false" />
+
+            <!-- Action row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mark_review_button"
+                    style="@style/Saraswati.Button.Tertiary"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height_m"
+                    android:layout_weight="1"
+                    android:text="@string/test_mark_review" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/clear_button"
+                    style="@style/Saraswati.Button.Tertiary"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height_m"
+                    android:layout_weight="1"
+                    android:text="@string/test_clear" />
+            </LinearLayout>
+
+            <!-- Palette card -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Saraswati.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_l"
+                app:contentPadding="@dimen/card_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/test_palette"
+                        android:textAppearance="@style/TextAppearance.Saraswati.Title" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/palette_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_s"
+                        android:nestedScrollingEnabled="false" />
+
+                    <!-- Legend -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_s"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <View android:layout_width="10dp" android:layout_height="10dp"
+                            android:background="@drawable/bg_legend_dot"
+                            android:backgroundTint="@color/positive"
+                            android:layout_marginEnd="@dimen/space_xxs" />
+                        <TextView
+                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/test_legend_answered"
+                            android:textAppearance="@style/TextAppearance.Saraswati.Label" />
+
+                        <View android:layout_width="10dp" android:layout_height="10dp"
+                            android:background="@drawable/bg_legend_dot"
+                            android:backgroundTint="@color/saffron"
+                            android:layout_marginStart="@dimen/space_m"
+                            android:layout_marginEnd="@dimen/space_xxs" />
+                        <TextView
+                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/test_legend_review"
+                            android:textAppearance="@style/TextAppearance.Saraswati.Label" />
+
+                        <View android:layout_width="10dp" android:layout_height="10dp"
+                            android:background="@drawable/bg_legend_dot"
+                            android:backgroundTint="@color/negative_light"
+                            android:layout_marginStart="@dimen/space_m"
+                            android:layout_marginEnd="@dimen/space_xxs" />
+                        <TextView
+                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/test_legend_not_answered"
+                            android:textAppearance="@style/TextAppearance.Saraswati.Label" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom action bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface_subtle"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_m"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/prev_button"
+            style="@style/Saraswati.Button.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height_l"
+            android:text="@string/test_previous" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next_button"
+            style="@style/Saraswati.Button.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_l"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/space_xs"
+            android:text="@string/test_next" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submit_button"
+            style="@style/Saraswati.Button.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height_l"
+            android:layout_marginStart="@dimen/space_xs"
+            android:text="@string/test_submit" />
+    </LinearLayout>
+
+</LinearLayout>

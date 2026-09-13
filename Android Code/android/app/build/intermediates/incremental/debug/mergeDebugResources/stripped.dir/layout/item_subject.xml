@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/space_xs"
+    app:cardCornerRadius="@dimen/card_radius"
+    app:cardElevation="@dimen/elevation_low"
+    app:cardBackgroundColor="@color/surface_subtle"
+    app:strokeColor="@color/stroke_minimal"
+    app:strokeWidth="@dimen/stroke_hairline"
+    android:clickable="true"
+    android:focusable="true"
+    app:contentPadding="@dimen/card_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/subject_dot"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_subject_dot"
+            android:backgroundTint="@color/subject_math" />
+
+        <TextView
+            android:id="@+id/subject_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m"
+            android:textAppearance="@style/TextAppearance.Saraswati.Title"
+            tools:text="Mathematics" />
+
+        <TextView
+            android:id="@+id/subject_meta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:textAppearance="@style/TextAppearance.Saraswati.BodySecondary"
+            tools:text="12 chapters" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

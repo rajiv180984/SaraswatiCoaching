@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/space_l"
+    android:paddingTop="@dimen/space_xl"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Section"
+        android:textAppearance="@style/TextAppearance.Saraswati.Title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_xxs"
+        android:text="@string/home_view_all"
+        android:textColor="@color/reliance_blue"
+        android:textAppearance="@style/TextAppearance.Saraswati.Label"
+        android:textSize="@dimen/text_body_m" />
+
+</LinearLayout>

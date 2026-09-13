@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="@dimen/space_m"
+    android:layout_marginBottom="@dimen/space_xs"
+    android:background="@drawable/bg_option_row"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/option_letter"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:background="@drawable/bg_option_letter"
+        android:textAppearance="@style/TextAppearance.Saraswati.Label"
+        android:textSize="@dimen/text_body_m"
+        android:textColor="@color/text_primary"
+        tools:text="A" />
+
+    <TextView
+        android:id="@+id/option_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/space_m"
+        android:textAppearance="@style/TextAppearance.Saraswati.Body"
+        android:textSize="@dimen/text_body_l"
+        tools:text="4" />
+
+    <View
+        android:id="@+id/option_radio"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_option_radio" />
+
+</LinearLayout>

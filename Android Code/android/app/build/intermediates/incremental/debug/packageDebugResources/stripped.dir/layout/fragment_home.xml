@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_minimal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/space_xl"
+        android:paddingBottom="@dimen/space_xl">
+
+        <!-- Greeting -->
+        <TextView
+            android:id="@+id/greeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_l"
+            android:textAppearance="@style/TextAppearance.Saraswati.Headline" />
+
+        <TextView
+            android:id="@+id/greeting_meta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_l"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:textAppearance="@style/TextAppearance.Saraswati.BodySecondary" />
+
+        <!-- Hero: Live now (saffron) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/live_card"
+            style="@style/Saraswati.Card.Hero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_l"
+            android:layout_marginTop="@dimen/space_l"
+            android:clickable="true"
+            android:focusable="true"
+            app:contentPadding="@dimen/space_l">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/bg_live_dot"
+                        android:layout_marginEnd="@dimen/space_xs" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_live_now"
+                        android:textColor="@color/white"
+                        android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                        android:textSize="@dimen/text_label_l" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:text="Algebra revision with Mr. Kumar"
+                    android:textColor="@color/white"
+                    android:textAppearance="@style/TextAppearance.Saraswati.Title"
+                    android:textSize="@dimen/text_title_l" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xxs"
+                    android:text="Started 4 minutes ago · 28 students"
+                    android:textColor="#FFF7E5"
+                    android:textAppearance="@style/TextAppearance.Saraswati.Body" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/button_height_m"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:text="Join class"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/saffron_dark"
+                    app:cornerRadius="@dimen/radius_component" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Continue learning -->
+        <include layout="@layout/section_header"
+            android:id="@+id/header_continue" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/continue_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_l"
+            android:clipToPadding="false"
+            android:layout_marginTop="@dimen/space_s" />
+
+        <!-- Subjects -->
+        <include layout="@layout/section_header"
+            android:id="@+id/header_subjects" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/subjects_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_m"
+            android:clipToPadding="false"
+            android:layout_marginTop="@dimen/space_s" />
+
+        <!-- Upcoming tests -->
+        <include layout="@layout/section_header"
+            android:id="@+id/header_tests" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tests_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_l"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginTop="@dimen/space_s" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============ JDS 3.1 — Brand ============ -->
+    <color name="reliance_blue">#1646BF</color>
+    <color name="reliance_blue_midnight">#0F35A0</color>
+    <color name="reliance_blue_light">#E7EDFB</color>
+
+    <!-- Saraswati saffron accent (warmer than JDS default) -->
+    <color name="saffron">#E89A3C</color>
+    <color name="saffron_dark">#C97D1F</color>
+    <color name="saffron_light">#FCEFD9</color>
+
+    <!-- ============ Surfaces ============ -->
+    <color name="surface_ghost">#00FFFFFF</color>
+    <color name="surface_minimal">#F7F9FC</color>
+    <color name="surface_subtle">#FFFFFF</color>
+    <color name="surface_moderate">#EEF2F8</color>
+    <color name="surface_bold">#1646BF</color>
+    <color name="surface_contrasting">#0A1F4D</color>
+
+    <!-- ============ Text ============ -->
+    <color name="text_primary">#0F1A36</color>
+    <color name="text_secondary">#5A6680</color>
+    <color name="text_tertiary">#8A95AD</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_accent">#FFFFFF</color>
+    <color name="text_link">#1646BF</color>
+
+    <!-- ============ Strokes ============ -->
+    <color name="stroke_minimal">#E2E7F0</color>
+    <color name="stroke_moderate">#C9D1E0</color>
+    <color name="stroke_heavy">#8A95AD</color>
+
+    <!-- ============ Semantic ============ -->
+    <color name="positive">#1F8A5B</color>
+    <color name="positive_light">#E0F3EA</color>
+    <color name="negative">#D4322D</color>
+    <color name="negative_light">#FBE5E4</color>
+    <color name="warning">#E89A3C</color>
+    <color name="warning_light">#FCEFD9</color>
+    <color name="informative">#1646BF</color>
+    <color name="informative_light">#E7EDFB</color>
+
+    <!-- ============ Subject color tags ============ -->
+    <color name="subject_math">#1646BF</color>
+    <color name="subject_science">#1F8A5B</color>
+    <color name="subject_english">#7C3AED</color>
+    <color name="subject_social">#E89A3C</color>
+    <color name="subject_hindi">#D4322D</color>
+    <color name="subject_sanskrit">#0EA5E9</color>
+
+    <!-- ============ System ============ -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="scrim">#80000000</color>
+    <color name="ripple_light">#1A1646BF</color>
+    <color name="ripple_dark">#33FFFFFF</color>
+
+</resources>

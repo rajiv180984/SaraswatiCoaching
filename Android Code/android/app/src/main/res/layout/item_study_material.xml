@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Saraswati.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_m"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/card_padding">
+
+        <!-- Row 1: Type badge (left) · Subject dot + label (right) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Material type pill badge -->
+            <TextView
+                android:id="@+id/type_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/space_xs"
+                android:paddingVertical="3dp"
+                android:background="@drawable/bg_badge"
+                android:textSize="@dimen/text_label_s"
+                android:textStyle="bold"
+                tools:text="PDF"
+                tools:textColor="@color/reliance_blue" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Subject colour dot -->
+            <View
+                android:id="@+id/subject_dot"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/bg_subject_dot" />
+
+            <!-- Subject name -->
+            <TextView
+                android:id="@+id/subject_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_xs"
+                android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                android:textColor="@color/text_secondary"
+                tools:text="Mathematics" />
+        </LinearLayout>
+
+        <!-- Material title -->
+        <TextView
+            android:id="@+id/material_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:textAppearance="@style/TextAppearance.Saraswati.Title"
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text="Algebra &amp; Linear Equations — Complete Notes" />
+
+        <!-- Chapter · size / duration -->
+        <TextView
+            android:id="@+id/material_meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:textAppearance="@style/TextAppearance.Saraswati.Label"
+            android:textColor="@color/text_secondary"
+            tools:text="Chapter 3  ·  2.4 MB" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/stroke_hairline"
+            android:layout_marginTop="@dimen/space_s"
+            android:background="@color/stroke_minimal" />
+
+        <!-- Action row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Downloaded indicator or hint -->
+            <TextView
+                android:id="@+id/download_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="@style/TextAppearance.Saraswati.Label"
+                android:textColor="@color/text_tertiary"
+                tools:text="Available offline" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/action_btn"
+                style="@style/Saraswati.Button.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height_m"
+                tools:text="Download" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

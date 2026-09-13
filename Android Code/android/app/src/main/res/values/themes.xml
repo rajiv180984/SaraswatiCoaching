@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ============ Base app theme (Material 3) ============ -->
+    <style name="Theme.Saraswati" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Brand -->
+        <item name="colorPrimary">@color/reliance_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/reliance_blue_light</item>
+        <item name="colorOnPrimaryContainer">@color/reliance_blue</item>
+
+        <item name="colorSecondary">@color/saffron</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/saffron_light</item>
+        <item name="colorOnSecondaryContainer">@color/saffron_dark</item>
+
+        <item name="colorError">@color/negative</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="android:colorBackground">@color/surface_minimal</item>
+        <item name="colorSurface">@color/surface_subtle</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorOutline">@color/stroke_moderate</item>
+        <item name="colorOutlineVariant">@color/stroke_minimal</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/surface_minimal</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/surface_subtle</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+
+        <!-- Defaults -->
+        <item name="android:fontFamily">@font/jiotype_var</item>
+        <item name="materialButtonStyle">@style/Saraswati.Button.Primary</item>
+        <item name="textInputStyle">@style/Saraswati.TextInput</item>
+    </style>
+
+    <!-- ============ Splash screen — instant blue window, no white flash ============ -->
+    <style name="Theme.Saraswati.Splash" parent="Theme.Saraswati">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:statusBarColor">@color/reliance_blue</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/reliance_blue</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Saraswati.TestAttempt" parent="Theme.Saraswati">
+        <item name="android:statusBarColor">@color/reliance_blue</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+</resources>

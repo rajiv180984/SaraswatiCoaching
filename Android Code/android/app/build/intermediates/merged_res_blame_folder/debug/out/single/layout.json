@@ -1,0 +1,114 @@
+[
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_doubt_card.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_doubt_card.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/fragment_study_material.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/fragment_study_material.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/activity_notification.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/activity_notification.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/section_header.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/section_header.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/activity_home.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/activity_home.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/activity_test_attempt.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/activity_test_attempt.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/nav_drawer_header.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/nav_drawer_header.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_option.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_option.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_lesson.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_lesson.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_test_section_header.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_test_section_header.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/activity_login.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_subject.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_subject.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_chat_user.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_chat_user.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/fragment_home.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_palette_chip.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_palette_chip.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/activity_otp.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/activity_otp.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/dialog_promo_banner.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/dialog_promo_banner.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/dialog_post_doubt.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/dialog_post_doubt.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_study_material.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_study_material.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/fragment_tests.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/fragment_tests.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_test_card.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_test_card.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/fragment_doubts.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/fragment_doubts.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/activity_registration.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/activity_registration.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_chat_typing.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_chat_typing.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_chat_system.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_chat_system.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_notification.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_notification.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/activity_splash.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.saraswati.institute.app-mergeDebugResources-4:/layout/item_test.xml",
+        "source": "com.saraswati.institute.app-main-7:/layout/item_test.xml"
+    }
+]

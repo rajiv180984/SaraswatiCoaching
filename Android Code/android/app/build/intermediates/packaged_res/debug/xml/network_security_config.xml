@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Trust the bundled saraswati-auth dev certificate for the local server only.
+    Everything else keeps the normal system trust store.
+
+    OkHttp is additionally configured (see TlsConfig) to trust ONLY this certificate
+    and to negotiate TLS 1.3 exclusively; this file keeps the platform HTTP stack and
+    tooling (e.g. WebView, image loaders) consistent with that.
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="false">localhost</domain>
+        <domain includeSubdomains="false">10.0.2.2</domain>
+        <trust-anchors>
+            <certificates src="@raw/saraswati_auth" />
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

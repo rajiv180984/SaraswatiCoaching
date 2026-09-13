@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/reliance_blue"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/space_l"
+    android:paddingEnd="@dimen/space_l"
+    android:paddingTop="48dp"
+    android:paddingBottom="@dimen/space_l">
+
+    <!-- Circular profile image with default avatar -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/drawer_profile_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_default_profile"
+        android:scaleType="centerInside"
+        android:background="@color/reliance_blue_midnight"
+        android:padding="10dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.App.CircleImage"
+        app:strokeColor="#66FFFFFF"
+        app:strokeWidth="2dp" />
+
+    <!-- Student name -->
+    <TextView
+        android:id="@+id/drawer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_s"
+        android:text="@string/demo_student_name"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.Saraswati.Title"
+        android:textSize="@dimen/text_title_l" />
+
+    <!-- Class · Section -->
+    <TextView
+        android:id="@+id/drawer_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_xxs"
+        android:textColor="#B3FFFFFF"
+        android:textAppearance="@style/TextAppearance.Saraswati.Label"
+        android:text="Class 9 · Section B" />
+
+</LinearLayout>

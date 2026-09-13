@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="220dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/space_m"
+    app:cardCornerRadius="@dimen/card_radius"
+    app:cardElevation="@dimen/elevation_low"
+    app:cardBackgroundColor="@color/surface_subtle"
+    app:strokeColor="@color/stroke_minimal"
+    app:strokeWidth="@dimen/stroke_hairline"
+    android:clickable="true"
+    android:focusable="true"
+    app:contentPadding="@dimen/card_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lesson_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Saraswati.Label"
+            tools:text="Mathematics" />
+
+        <TextView
+            android:id="@+id/lesson_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.Saraswati.Title"
+            tools:text="Trigonometry — Ratios" />
+
+        <ProgressBar
+            android:id="@+id/lesson_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginTop="@dimen/space_m"
+            android:progressTint="@color/reliance_blue"
+            android:progressBackgroundTint="@color/stroke_minimal" />
+
+        <TextView
+            android:id="@+id/lesson_progress_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:textAppearance="@style/TextAppearance.Saraswati.Label"
+            tools:text="65%" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

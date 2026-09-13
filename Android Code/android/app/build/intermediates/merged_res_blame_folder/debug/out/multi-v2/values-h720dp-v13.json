@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.saraswati.institute.app-mergeDebugResources-3:/values-h720dp-v13/values-h720dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Software\\gradle-8.2-bin\\caches\\transforms-3\\701d189b4b775d06072e8cbce967c396\\transformed\\appcompat-1.6.1\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="black">#000000</color>
+    <color name="informative">#1646BF</color>
+    <color name="informative_light">#E7EDFB</color>
+    <color name="negative">#D4322D</color>
+    <color name="negative_light">#FBE5E4</color>
+    <color name="positive">#1F8A5B</color>
+    <color name="positive_light">#E0F3EA</color>
+    <color name="reliance_blue">#1646BF</color>
+    <color name="reliance_blue_light">#E7EDFB</color>
+    <color name="reliance_blue_midnight">#0F35A0</color>
+    <color name="ripple_dark">#33FFFFFF</color>
+    <color name="ripple_light">#1A1646BF</color>
+    <color name="saffron">#E89A3C</color>
+    <color name="saffron_dark">#C97D1F</color>
+    <color name="saffron_light">#FCEFD9</color>
+    <color name="scrim">#80000000</color>
+    <color name="stroke_heavy">#8A95AD</color>
+    <color name="stroke_minimal">#E2E7F0</color>
+    <color name="stroke_moderate">#C9D1E0</color>
+    <color name="subject_english">#7C3AED</color>
+    <color name="subject_hindi">#D4322D</color>
+    <color name="subject_math">#1646BF</color>
+    <color name="subject_sanskrit">#0EA5E9</color>
+    <color name="subject_science">#1F8A5B</color>
+    <color name="subject_social">#E89A3C</color>
+    <color name="surface_bold">#1646BF</color>
+    <color name="surface_contrasting">#0A1F4D</color>
+    <color name="surface_ghost">#00FFFFFF</color>
+    <color name="surface_minimal">#F7F9FC</color>
+    <color name="surface_moderate">#EEF2F8</color>
+    <color name="surface_subtle">#FFFFFF</color>
+    <color name="text_link">#1646BF</color>
+    <color name="text_on_accent">#FFFFFF</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_primary">#0F1A36</color>
+    <color name="text_secondary">#5A6680</color>
+    <color name="text_tertiary">#8A95AD</color>
+    <color name="warning">#E89A3C</color>
+    <color name="warning_light">#FCEFD9</color>
+    <color name="white">#FFFFFF</color>
+    <dimen name="appbar_height">56dp</dimen>
+    <dimen name="bottom_nav_height">72dp</dimen>
+    <dimen name="button_height_l">48dp</dimen>
+    <dimen name="button_height_m">40dp</dimen>
+    <dimen name="button_height_s">32dp</dimen>
+    <dimen name="button_height_xl">56dp</dimen>
+    <dimen name="button_height_xs">24dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_padding_large">20dp</dimen>
+    <dimen name="card_radius">16dp</dimen>
+    <dimen name="elevation_high">12dp</dimen>
+    <dimen name="elevation_low">1dp</dimen>
+    <dimen name="elevation_medium">4dp</dimen>
+    <dimen name="input_height">48dp</dimen>
+    <dimen name="radius_component">8dp</dimen>
+    <dimen name="radius_component_large">12dp</dimen>
+    <dimen name="radius_layout">24dp</dimen>
+    <dimen name="radius_pattern">16dp</dimen>
+    <dimen name="radius_pill">999dp</dimen>
+    <dimen name="space_l">24dp</dimen>
+    <dimen name="space_m">16dp</dimen>
+    <dimen name="space_s">12dp</dimen>
+    <dimen name="space_xl">32dp</dimen>
+    <dimen name="space_xs">8dp</dimen>
+    <dimen name="space_xxl">48dp</dimen>
+    <dimen name="space_xxs">4dp</dimen>
+    <dimen name="space_xxxl">64dp</dimen>
+    <dimen name="stroke_emphasized">2dp</dimen>
+    <dimen name="stroke_hairline">1dp</dimen>
+    <dimen name="text_body_l">16sp</dimen>
+    <dimen name="text_body_m">14sp</dimen>
+    <dimen name="text_body_s">12sp</dimen>
+    <dimen name="text_display_l">48sp</dimen>
+    <dimen name="text_display_m">40sp</dimen>
+    <dimen name="text_display_s">32sp</dimen>
+    <dimen name="text_headline_l">28sp</dimen>
+    <dimen name="text_headline_m">24sp</dimen>
+    <dimen name="text_headline_s">20sp</dimen>
+    <dimen name="text_label_l">14sp</dimen>
+    <dimen name="text_label_m">12sp</dimen>
+    <dimen name="text_label_s">10sp</dimen>
+    <dimen name="text_title_l">18sp</dimen>
+    <dimen name="text_title_m">16sp</dimen>
+    <dimen name="text_title_s">14sp</dimen>
+    <dimen name="touch_target_min">44dp</dimen>
+    <string name="app_name">Saraswati Institute</string>
+    <string name="back">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="demo_class">9</string>
+    <string name="demo_phone">+91 98765 43210</string>
+    <string name="demo_q1">If 2x + 3 = 11, what is the value of x?</string>
+    <string name="demo_q1_opt_a">3</string>
+    <string name="demo_q1_opt_b">4</string>
+    <string name="demo_q1_opt_c">5</string>
+    <string name="demo_q1_opt_d">6</string>
+    <string name="demo_section">B</string>
+    <string name="demo_student_name">Aarav</string>
+    <string name="demo_test_title">Mathematics — Chapter 6 Test</string>
+    <string name="doubt_ai_name">Saraswati AI Assistant</string>
+    <string name="doubt_ai_online">Online · responds instantly</string>
+    <string name="doubt_ai_typing">Typing…</string>
+    <string name="doubt_answered_by">Answered by %1$s</string>
+    <string name="doubt_chapter_hint">e.g. Chapter 4</string>
+    <string name="doubt_chapter_label">Chapter (optional)</string>
+    <string name="doubt_chat_hint">Ask your doubt here…</string>
+    <string name="doubt_empty_hint">Tap + to post your first doubt.\nYour teacher will answer it soon.</string>
+    <string name="doubt_empty_question_error">Please write your question.</string>
+    <string name="doubt_empty_title">No doubts yet</string>
+    <string name="doubt_pending_hint">Awaiting answer from your teacher…</string>
+    <string name="doubt_post_btn">Post</string>
+    <string name="doubt_post_title">Post a Doubt</string>
+    <string name="doubt_posted_toast">Doubt posted! Your teacher will answer soon.</string>
+    <string name="doubt_question_hint">Describe your doubt clearly…</string>
+    <string name="doubt_question_label">Your Question *</string>
+    <string name="doubt_select_subject_error">Please select a subject.</string>
+    <string name="doubt_status_answered">Answered</string>
+    <string name="doubt_status_pending">Pending</string>
+    <string name="doubt_subject_label">Subject *</string>
+    <string name="doubt_tab_live">Live Query</string>
+    <string name="doubt_tab_qa">Q&amp;A</string>
+    <string name="drawer_about">About Coaching</string>
+    <string name="drawer_attendance">Attendance</string>
+    <string name="drawer_close">Close navigation menu</string>
+    <string name="drawer_contact">Contact Details</string>
+    <string name="drawer_course">Course</string>
+    <string name="drawer_feedback">Feedback</string>
+    <string name="drawer_grievance">Grievance Report</string>
+    <string name="drawer_library">Library</string>
+    <string name="drawer_location">Location</string>
+    <string name="drawer_logout">Logout</string>
+    <string name="drawer_open">Open navigation menu</string>
+    <string name="drawer_payment">Payment Details</string>
+    <string name="drawer_performance">Performance</string>
+    <string name="drawer_refer">Refer and Earn</string>
+    <string name="drawer_registration">Registration</string>
+    <string name="drawer_teachers">Teachers Details</string>
+    <string name="home_announcements">Announcements</string>
+    <string name="home_class">Class %1$s · Section %2$s</string>
+    <string name="home_continue">Continue learning</string>
+    <string name="home_greeting">Hello, %1$s</string>
+    <string name="home_live_now">Live now</string>
+    <string name="home_streak">%1$d-day streak</string>
+    <string name="home_subjects">My subjects</string>
+    <string name="home_upcoming_tests">Upcoming tests</string>
+    <string name="home_view_all">View all</string>
+    <string name="login_brand_subtitle">Coaching for Class 6 to 12</string>
+    <string name="login_brand_title">Saraswati Institute</string>
+    <string name="login_country_code">+91</string>
+    <string name="login_create_account">Create an account</string>
+    <string name="login_email_label">Email address</string>
+    <string name="login_error_email">Enter a valid email address</string>
+    <string name="login_error_password">Enter your password</string>
+    <string name="login_forgot_password">Forgot password?</string>
+    <string name="login_help">Need help? Contact your branch</string>
+    <string name="login_no_account">New to Saraswati?</string>
+    <string name="login_password_label">Password</string>
+    <string name="login_phone_hint">10-digit mobile number</string>
+    <string name="login_phone_label">Mobile number</string>
+    <string name="login_send_otp">Send OTP</string>
+    <string name="login_sign_in">Sign in</string>
+    <string name="login_signing_in">Signing in…</string>
+    <string name="login_subtitle">Sign in with your registered email and password</string>
+    <string name="login_welcome">Welcome back</string>
+    <string name="nav_doubts">Doubts</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_schedule">Schedule</string>
+    <string name="nav_study">Study</string>
+    <string name="nav_study_material">Study Material</string>
+    <string name="nav_tests">Tests</string>
+    <string name="otp_change_number">Change number</string>
+    <string name="otp_invalid">Incorrect OTP. Try again.</string>
+    <string name="otp_resend">Resend OTP</string>
+    <string name="otp_resend_in">Resend OTP in %1$ds</string>
+    <string name="otp_subtitle">We sent a 4-digit code to %1$s</string>
+    <string name="otp_title">Enter OTP</string>
+    <string name="otp_verify">Verify and continue</string>
+    <string name="registration_submit">Submit Registration</string>
+    <string name="registration_submitting">Submitting…</string>
+    <string name="splash_footer">Empowering Students · Shaping Futures</string>
+    <string name="splash_tagline">Coaching for Class 6 to 12</string>
+    <string name="study_available_offline">Available offline</string>
+    <string name="study_download">Download</string>
+    <string name="study_open">Open</string>
+    <string name="study_type_mindmap">Mind Map</string>
+    <string name="study_type_notes">Notes</string>
+    <string name="study_type_pdf">PDF</string>
+    <string name="study_type_qpaper">Q. Paper</string>
+    <string name="study_type_video">Video</string>
+    <string name="study_watch">Watch</string>
+    <string name="test_clear">Clear response</string>
+    <string name="test_legend_answered">Answered</string>
+    <string name="test_legend_not_answered">Not answered</string>
+    <string name="test_legend_not_visited">Not visited</string>
+    <string name="test_legend_review">Marked</string>
+    <string name="test_mark_review">Mark for review</string>
+    <string name="test_marks">%1$d marks</string>
+    <string name="test_negative">−%1$.2f for wrong</string>
+    <string name="test_next">Next</string>
+    <string name="test_palette">Question palette</string>
+    <string name="test_previous">Previous</string>
+    <string name="test_question_of">Question %1$d of %2$d</string>
+    <string name="test_submit">Submit test</string>
+    <string name="test_submit_confirm_message">You have answered %1$d of %2$d questions. You cannot change answers after submitting.</string>
+    <string name="test_submit_confirm_no">Continue test</string>
+    <string name="test_submit_confirm_title">Submit test?</string>
+    <string name="test_submit_confirm_yes">Submit</string>
+    <string name="tests_completed">Completed</string>
+    <string name="tests_download">Download</string>
+    <string name="tests_hint_offline">Download to attempt offline</string>
+    <string name="tests_hint_online">Tap to begin the test</string>
+    <string name="tests_offline">Offline</string>
+    <string name="tests_online">Online</string>
+    <string name="tests_percentile">Percentile</string>
+    <string name="tests_rank">Rank</string>
+    <string name="tests_score">Score</string>
+    <string name="tests_start">Start Test</string>
+    <style name="Saraswati.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/button_height_l</item>
+        <item name="cornerRadius">@dimen/radius_component</item>
+        <item name="backgroundTint">@color/reliance_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_body_l</item>
+        <item name="android:fontFamily">@font/jiotype_var</item>
+        <item name="android:textFontWeight">600</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingStart">@dimen/space_l</item>
+        <item name="android:paddingEnd">@dimen/space_l</item>
+    </style>
+    <style name="Saraswati.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">@dimen/button_height_l</item>
+        <item name="cornerRadius">@dimen/radius_component</item>
+        <item name="strokeColor">@color/stroke_moderate</item>
+        <item name="strokeWidth">@dimen/stroke_hairline</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">@dimen/text_body_l</item>
+        <item name="android:fontFamily">@font/jiotype_var</item>
+        <item name="android:textFontWeight">600</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="Saraswati.Button.Tertiary" parent="Widget.Material3.Button.TextButton">
+        <item name="android:minHeight">@dimen/button_height_l</item>
+        <item name="android:textColor">@color/reliance_blue</item>
+        <item name="android:textSize">@dimen/text_body_l</item>
+        <item name="android:fontFamily">@font/jiotype_var</item>
+        <item name="android:textFontWeight">600</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="Saraswati.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+        <item name="cardElevation">@dimen/elevation_low</item>
+        <item name="cardBackgroundColor">@color/surface_subtle</item>
+        <item name="contentPadding">@dimen/card_padding</item>
+    </style>
+    <style name="Saraswati.Card.Hero" parent="Saraswati.Card">
+        <item name="cardBackgroundColor">@color/saffron</item>
+        <item name="cardElevation">@dimen/elevation_medium</item>
+    </style>
+    <style name="Saraswati.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_component</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_component</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_component</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_component</item>
+        <item name="boxStrokeColor">@color/reliance_blue</item>
+        <item name="boxStrokeWidth">@dimen/stroke_hairline</item>
+        <item name="boxStrokeWidthFocused">@dimen/stroke_emphasized</item>
+        <item name="hintTextColor">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_tertiary</item>
+    </style>
+    <style name="ShapeAppearance.App.CircleImage" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="TextAppearance.Saraswati.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_body_m</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:fontFamily">@font/jiotype_var</item>
+        <item name="android:textFontWeight">400</item>
+    </style>
+    <style name="TextAppearance.Saraswati.BodySecondary" parent="TextAppearance.Saraswati.Body">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+    <style name="TextAppearance.Saraswati.Display" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="android:textSize">@dimen/text_display_m</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:fontFamily">@font/jiotype_var</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+    <style name="TextAppearance.Saraswati.Headline" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textSize">@dimen/text_headline_m</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:fontFamily">@font/jiotype_var</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+    <style name="TextAppearance.Saraswati.Label" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">@dimen/text_label_m</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:fontFamily">@font/jiotype_var</item>
+        <item name="android:textFontWeight">500</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="TextAppearance.Saraswati.Title" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">@dimen/text_title_m</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:fontFamily">@font/jiotype_var</item>
+        <item name="android:textFontWeight">600</item>
+    </style>
+    <style name="Theme.Saraswati" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/reliance_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/reliance_blue_light</item>
+        <item name="colorOnPrimaryContainer">@color/reliance_blue</item>
+
+        <item name="colorSecondary">@color/saffron</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/saffron_light</item>
+        <item name="colorOnSecondaryContainer">@color/saffron_dark</item>
+
+        <item name="colorError">@color/negative</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="android:colorBackground">@color/surface_minimal</item>
+        <item name="colorSurface">@color/surface_subtle</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorOutline">@color/stroke_moderate</item>
+        <item name="colorOutlineVariant">@color/stroke_minimal</item>
+
+        
+        <item name="android:statusBarColor">@color/surface_minimal</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/surface_subtle</item>
+        <item name="android:windowLightNavigationBar" ns1:targetApi="o_mr1">true</item>
+
+        
+        <item name="android:fontFamily">@font/jiotype_var</item>
+        <item name="materialButtonStyle">@style/Saraswati.Button.Primary</item>
+        <item name="textInputStyle">@style/Saraswati.TextInput</item>
+    </style>
+    <style name="Theme.Saraswati.Splash" parent="Theme.Saraswati">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:statusBarColor">@color/reliance_blue</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/reliance_blue</item>
+        <item name="android:windowLightNavigationBar" ns1:targetApi="o_mr1">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <style name="Theme.Saraswati.TestAttempt" parent="Theme.Saraswati">
+        <item name="android:statusBarColor">@color/reliance_blue</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
