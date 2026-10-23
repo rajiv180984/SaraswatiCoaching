@@ -33,6 +33,34 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
+        <!--
+            Opened by the link in the password-reset email
+            (<app.frontend-url>/reset-password?token=…), or from the login screen when the
+            student has the code to hand.
+        -->
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".LoginActivity">
+            <!-- One filter per host: data attributes are combined across tags within a
+                 single filter, which would also match host/port pairs we never serve. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="3.108.167.166" android:port="8443"
+                    android:path="/reset-password" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="localhost" android:port="8443"
+                    android:path="/reset-password" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".OtpActivity"
             android:exported="false"

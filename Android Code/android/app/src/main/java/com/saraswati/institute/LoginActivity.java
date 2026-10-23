@@ -10,35 +10,41 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.saraswati.institute.network.ApiCallback;
 import com.saraswati.institute.network.ApiClient;
-import com.saraswati.institute.network.ApiResponse;
-import com.saraswati.institute.network.AuthResponse;
-import com.saraswati.institute.network.ForgotPasswordRequest;
-import com.saraswati.institute.network.LoginRequest;
+import com.saraswati.institute.network.ApiError;
+import com.saraswati.institute.network.AuthRequests;
+import com.saraswati.institute.network.MessageResponse;
 import com.saraswati.institute.network.SessionManager;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.saraswati.institute.network.TokenResponse;
 
 /**
- * Login screen — email + password against {@code POST /api/auth/login} on saraswati-auth.
- * On success the JWT access/refresh tokens are stored via {@link SessionManager} and the
- * user lands on {@link HomeActivity}.
+ * Login screen for {@code POST /api/v1/auth/login}.
+ *
+ * <p>The service authenticates on <b>username or email</b> ({@code usernameOrEmail}), so the
+ * first field accepts either. On success the token pair and profile are stored in
+ * {@link SessionManager} and the user lands on {@link HomeActivity}. The service distinguishes
+ * bad credentials (401), a disabled account or unverified address (403) and a temporary lock
+ * after repeated failures (423); each gets its own treatment below.
  */
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
 
-    private TextInputLayout   emailLayout, passwordLayout;
-    private TextInputEditText emailInput, passwordInput;
-    private MaterialButton    loginButton;
-    private CharSequence      loginButtonText;
+    private TextInputLayout identifierLayout;
+    private TextInputLayout passwordLayout;
+    private TextInputEditText identifierInput;
+    private TextInputEditText passwordInput;
+    private MaterialButton loginButton;
+    private CharSequence loginButtonText;
 
     private SessionManager session;
 
@@ -49,14 +55,14 @@ public class LoginActivity extends AppCompatActivity {
 
         session = SessionManager.getInstance(this);
 
-        emailLayout    = findViewById(R.id.email_layout);
+        identifierLayout = findViewById(R.id.email_layout);
         passwordLayout = findViewById(R.id.password_layout);
-        emailInput     = findViewById(R.id.email_input);
-        passwordInput  = findViewById(R.id.password_input);
-        loginButton    = findViewById(R.id.login_button);
+        identifierInput = findViewById(R.id.email_input);
+        passwordInput = findViewById(R.id.password_input);
+        loginButton = findViewById(R.id.login_button);
         loginButtonText = loginButton.getText();
 
-        clearErrorOnType(emailInput, emailLayout);
+        clearErrorOnType(identifierInput, identifierLayout);
         clearErrorOnType(passwordInput, passwordLayout);
 
         passwordInput.setOnEditorActionListener((v, actionId, event) -> {
@@ -69,14 +75,28 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(v -> attemptLogin());
         findViewById(R.id.register_link).setOnClickListener(v ->
-            startActivity(new Intent(this, RegistrationActivity.class)));
+                startActivity(new Intent(this, RegistrationActivity.class)));
         findViewById(R.id.forgot_password).setOnClickListener(v -> requestPasswordReset());
+
+        prefillIdentifier();
     }
 
-    // ── Validation ───────────────────────────────────────
+    /** After a sign-out the username is still known, so only the password has to be typed. */
+    private void prefillIdentifier() {
+        String remembered = session.getUsername();
+        if (remembered == null || remembered.isEmpty()) {
+            remembered = session.getUserEmail();
+        }
+        if (remembered != null && !remembered.isEmpty()) {
+            identifierInput.setText(remembered);
+            passwordInput.requestFocus();
+        }
+    }
 
-    private String email() {
-        return emailInput.getText() != null ? emailInput.getText().toString().trim() : "";
+    // ── Input ────────────────────────────────────────────
+
+    private String identifier() {
+        return identifierInput.getText() != null ? identifierInput.getText().toString().trim() : "";
     }
 
     private String password() {
@@ -85,8 +105,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean validate() {
         boolean ok = true;
-        if (!Patterns.EMAIL_ADDRESS.matcher(email()).matches()) {
-            emailLayout.setError(getString(R.string.login_error_email));
+        if (identifier().isEmpty()) {
+            identifierLayout.setError(getString(R.string.login_error_identifier));
             ok = false;
         }
         if (password().isEmpty()) {
@@ -100,68 +120,151 @@ public class LoginActivity extends AppCompatActivity {
 
     private void attemptLogin() {
         dismissKeyboard();
-        if (!validate()) return;
-
-        Log.d(TAG, "Attempting login for " + email());
-        setLoading(true);
-        ApiClient.getAuthApi()
-            .login(new LoginRequest(email(), password()))
-            .enqueue(new Callback<ApiResponse<AuthResponse>>() {
-                @Override
-                public void onResponse(Call<ApiResponse<AuthResponse>> call,
-                                       Response<ApiResponse<AuthResponse>> response) {
-                    setLoading(false);
-                    ApiResponse<AuthResponse> body = response.body();
-                    if (response.isSuccessful() && body != null && body.getData() != null) {
-                        Log.i(TAG, "Login succeeded for " + email());
-                        session.saveSession(body.getData());
-                        goHome();
-                    } else {
-                        Log.w(TAG, "Login rejected (HTTP " + response.code() + ")");
-                        passwordLayout.setError(messageOr(body, "Invalid email or password"));
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ApiResponse<AuthResponse>> call, Throwable t) {
-                    setLoading(false);
-                    Log.e(TAG, "Login call failed", t);
-                    Toast.makeText(LoginActivity.this,
-                        "Could not reach the server: " + t.getMessage(),
-                        Toast.LENGTH_LONG).show();
-                }
-            });
-    }
-
-    private void requestPasswordReset() {
-        if (!Patterns.EMAIL_ADDRESS.matcher(email()).matches()) {
-            emailLayout.setError(getString(R.string.login_error_email));
+        if (!validate()) {
             return;
         }
-        Log.d(TAG, "Requesting password reset for " + email());
-        ApiClient.getAuthApi()
-            .forgotPassword(new ForgotPasswordRequest(email()))
-            .enqueue(new Callback<ApiResponse<Void>>() {
-                @Override
-                public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
-                    Log.i(TAG, "Password reset request completed (HTTP " + response.code() + ")");
-                    Toast.makeText(LoginActivity.this,
-                        "If that email is registered, a reset link has been sent",
-                        Toast.LENGTH_LONG).show();
-                }
 
-                @Override
-                public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
-                    Log.e(TAG, "Password reset call failed", t);
-                    Toast.makeText(LoginActivity.this,
-                        "Could not reach the server: " + t.getMessage(),
-                        Toast.LENGTH_LONG).show();
-                }
-            });
+        setLoading(true);
+        ApiClient.getAuthApi()
+                .login(new AuthRequests.Login(identifier(), password()))
+                .enqueue(new ApiCallback<TokenResponse>() {
+                    @Override
+                    public void onSuccess(@Nullable TokenResponse tokens) {
+                        if (tokens == null || !tokens.hasTokens()) {
+                            Log.w(TAG, "Login returned no tokens");
+                            passwordLayout.setError(getString(R.string.login_error_unexpected));
+                            return;
+                        }
+                        session.saveSession(tokens);
+                        Log.i(TAG, "Signed in with role " + tokens.getRole());
+                        goHome();
+                    }
+
+                    @Override
+                    public void onError(@NonNull ApiError error) {
+                        Log.w(TAG, "Login failed: " + error);
+                        handleLoginError(error);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        setLoading(false);
+                    }
+                });
+    }
+
+    private void handleLoginError(ApiError error) {
+        if (error.isTransport()) {
+            Toast.makeText(this, error.message(), Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (error.isEmailNotVerified()) {
+            promptResendVerification();
+            return;
+        }
+        if (error.isAccountLocked() || error.isForbidden()) {
+            new MaterialAlertDialogBuilder(this)
+                    .setTitle(error.isAccountLocked()
+                            ? R.string.login_locked_title
+                            : R.string.login_blocked_title)
+                    .setMessage(error.message())
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
+            return;
+        }
+        // 401 and anything else: the message belongs next to the credential fields.
+        passwordLayout.setError(error.message());
+    }
+
+    /**
+     * A 403 about verification means the account exists and the password was right — the
+     * address simply has not been confirmed, so offer to send the email again.
+     */
+    private void promptResendVerification() {
+        final String email = identifier();
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.login_verify_title)
+                .setMessage(R.string.login_verify_message)
+                .setNegativeButton(android.R.string.cancel, null);
+
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            dialog.setPositiveButton(R.string.login_verify_resend, (d, which) -> resendVerification(email));
+        } else {
+            // The service only resends by email address, not by username.
+            dialog.setMessage(getString(R.string.login_verify_message_username));
+            dialog.setPositiveButton(android.R.string.ok, null);
+        }
+        dialog.show();
+    }
+
+    private void resendVerification(String email) {
+        ApiClient.getAuthApi()
+                .resendVerification(new AuthRequests.Email(email))
+                .enqueue(new ApiCallback<MessageResponse>() {
+                    @Override
+                    public void onSuccess(@Nullable MessageResponse body) {
+                        Toast.makeText(LoginActivity.this,
+                                body != null
+                                        ? body.messageOr(getString(R.string.login_verify_sent))
+                                        : getString(R.string.login_verify_sent),
+                                Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(@NonNull ApiError error) {
+                        Toast.makeText(LoginActivity.this, error.message(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    // ── Forgot password ──────────────────────────────────
+
+    /**
+     * {@code forgot-password} takes an email address and always answers 200, so the reply
+     * never reveals whether the address is registered.
+     */
+    private void requestPasswordReset() {
+        final String email = identifier();
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            identifierLayout.setError(getString(R.string.login_error_email_for_reset));
+            return;
+        }
+        ApiClient.getAuthApi()
+                .forgotPassword(new AuthRequests.Email(email))
+                .enqueue(new ApiCallback<MessageResponse>() {
+                    @Override
+                    public void onSuccess(@Nullable MessageResponse body) {
+                        // In dev the service echoes the token as debugToken, so the reset
+                        // screen can be opened with it already filled in.
+                        final String debugToken = body != null ? body.getDebugToken() : null;
+                        new MaterialAlertDialogBuilder(LoginActivity.this)
+                                .setTitle(R.string.login_reset_title)
+                                .setMessage(body != null
+                                        ? body.messageOr(getString(R.string.login_reset_sent))
+                                        : getString(R.string.login_reset_sent))
+                                .setPositiveButton(R.string.login_reset_enter_code,
+                                        (dialog, which) -> openResetScreen(debugToken))
+                                .setNegativeButton(android.R.string.ok, null)
+                                .show();
+                    }
+
+                    @Override
+                    public void onError(@NonNull ApiError error) {
+                        Toast.makeText(LoginActivity.this, error.message(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    /** Opens the reset screen; {@code token} is pre-filled when the service handed one back. */
+    private void openResetScreen(@Nullable String token) {
+        Intent intent = new Intent(this, ResetPasswordActivity.class);
+        if (token != null && !token.isEmpty()) {
+            intent.putExtra(ResetPasswordActivity.EXTRA_TOKEN, token);
+        }
+        startActivity(intent);
     }
 
     private void goHome() {
-        Log.d(TAG, "Navigating to HomeActivity");
         startActivity(new Intent(this, HomeActivity.class));
         finishAffinity();
     }
@@ -170,23 +273,25 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setLoading(boolean loading) {
         loginButton.setEnabled(!loading);
-        emailInput.setEnabled(!loading);
+        identifierInput.setEnabled(!loading);
         passwordInput.setEnabled(!loading);
         loginButton.setText(loading ? getString(R.string.login_signing_in) : loginButtonText);
     }
 
-    private static String messageOr(ApiResponse<?> body, String fallback) {
-        if (body != null && body.getMessage() != null && !body.getMessage().isEmpty()) {
-            return body.getMessage();
-        }
-        return fallback;
-    }
-
     private void clearErrorOnType(TextInputEditText input, TextInputLayout layout) {
         input.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int a, int b, int c) {}
-            @Override public void onTextChanged(CharSequence s, int a, int b, int c) { layout.setError(null); }
-            @Override public void afterTextChanged(Editable s) {}
+            @Override
+            public void beforeTextChanged(CharSequence s, int a, int b, int c) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int a, int b, int c) {
+                layout.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
         });
     }
 

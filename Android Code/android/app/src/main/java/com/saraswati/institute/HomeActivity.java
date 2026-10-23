@@ -21,13 +21,13 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.saraswati.institute.network.ApiCallback;
 import com.saraswati.institute.network.ApiClient;
-import com.saraswati.institute.network.ApiResponse;
+import com.saraswati.institute.network.ApiError;
+import com.saraswati.institute.network.AuthRequests;
+import com.saraswati.institute.network.MessageResponse;
 import com.saraswati.institute.network.SessionManager;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.saraswati.institute.network.UserResponse;
 
 /**
  * Host activity for the student app shell.
@@ -204,32 +204,63 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(new Intent(this, TestAttemptActivity.class));
     }
 
-    /** Fills the drawer header with the cached profile from {@link SessionManager}. */
+    /**
+     * Fills the drawer header from the cached profile, then refreshes it from
+     * {@code GET /api/v1/users/me} so a change made elsewhere shows up.
+     */
     private void populateDrawerHeader(NavigationView navDrawer) {
         View header = navDrawer.getHeaderView(0);
         if (header == null) return;
 
         SessionManager session = SessionManager.getInstance(this);
-        String name = session.getUserName();
+        showProfile(header, session.getUserName(), session.getUserEmail());
 
+        ApiClient.getAuthApi().getMe().enqueue(new ApiCallback<UserResponse>() {
+            @Override
+            public void onSuccess(UserResponse user) {
+                if (user == null || isFinishing()) return;
+                session.saveUser(user);
+                showProfile(header, user.getFullName(), user.getEmail());
+            }
+
+            @Override
+            public void onError(ApiError error) {
+                // The cached profile is already on screen; a 401 is handled by the authenticator.
+            }
+        });
+    }
+
+    private void showProfile(View header, String name, String email) {
         TextView nameView = header.findViewById(R.id.drawer_name);
         if (nameView != null) {
-            nameView.setText(!TextUtils.isEmpty(name) ? name : session.getUserEmail());
+            nameView.setText(!TextUtils.isEmpty(name) ? name : email);
         }
     }
 
     // ── Logout ────────────────────────────────────────────
 
+    /**
+     * Revokes the refresh token server-side ({@code POST /api/v1/auth/logout}) and clears the
+     * local session. The local side happens regardless of the call's outcome, so a network
+     * problem can never leave the user stuck signed in.
+     */
     private void logout() {
-        // Best-effort server-side invalidation; the local session is cleared regardless.
-        ApiClient.getAuthApi().logout().enqueue(new Callback<ApiResponse<Void>>() {
-            @Override
-            public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) { }
-            @Override
-            public void onFailure(Call<ApiResponse<Void>> call, Throwable t) { }
-        });
+        SessionManager session = SessionManager.getInstance(this);
+        String refreshToken = session.getRefreshToken();
 
-        SessionManager.getInstance(this).clear();
+        if (refreshToken != null && !refreshToken.isEmpty()) {
+            ApiClient.getAuthApi()
+                .logout(new AuthRequests.RefreshToken(refreshToken))
+                .enqueue(new ApiCallback<MessageResponse>() {
+                    @Override
+                    public void onSuccess(MessageResponse body) { }
+
+                    @Override
+                    public void onError(ApiError error) { }
+                });
+        }
+
+        session.clear();
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

@@ -10,7 +10,11 @@ import android.view.animation.OvershootInterpolator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.saraswati.institute.network.ApiCallback;
+import com.saraswati.institute.network.ApiClient;
+import com.saraswati.institute.network.ApiError;
 import com.saraswati.institute.network.SessionManager;
+import com.saraswati.institute.network.UserResponse;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -89,10 +93,47 @@ public class SplashActivity extends AppCompatActivity {
             .start();
     }
 
+    /**
+     * Decides where to go next.
+     *
+     * <p>A stored refresh token is not proof of a usable session — it may have been revoked
+     * server-side (a password change, {@code logout-all}, or reuse detection). So when there
+     * is a session, {@code GET /api/v1/users/me} is called once: it renews the access token
+     * through {@link com.saraswati.institute.network.TokenAuthenticator} if needed, and tells
+     * us whether the session still stands. A transport failure is not treated as a sign-out —
+     * the app opens offline on the cached profile.
+     */
     private void routeNext() {
-        boolean loggedIn = SessionManager.getInstance(this).isLoggedIn();
-        Class<?> next = loggedIn ? HomeActivity.class : LoginActivity.class;
-        startActivity(new Intent(this, next));
+        final SessionManager session = SessionManager.getInstance(this);
+        if (!session.isLoggedIn()) {
+            go(LoginActivity.class);
+            return;
+        }
+
+        ApiClient.getAuthApi().getMe().enqueue(new ApiCallback<UserResponse>() {
+            @Override
+            public void onSuccess(UserResponse user) {
+                session.saveUser(user);
+                go(HomeActivity.class);
+            }
+
+            @Override
+            public void onError(ApiError error) {
+                if (error.isTransport()) {
+                    go(HomeActivity.class);   // offline: carry on with what is cached
+                } else {
+                    session.clear();          // the session is genuinely gone
+                    go(LoginActivity.class);
+                }
+            }
+        });
+    }
+
+    private void go(Class<?> target) {
+        if (isFinishing()) {
+            return;
+        }
+        startActivity(new Intent(this, target));
         // Smooth cross-fade transition
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();

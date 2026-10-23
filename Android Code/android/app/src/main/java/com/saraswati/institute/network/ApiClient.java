@@ -3,6 +3,10 @@ package com.saraswati.institute.network;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
+import com.saraswati.institute.BuildConfig;
+
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
@@ -12,27 +16,29 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Single entry point for the saraswati-auth API.
+ * Single entry point for the auth-service API.
  *
- * <p>Base URL: {@value #BASE_URL} — HTTPS, <b>TLS 1.3 only</b>, self-signed dev certificate
- * bundled at {@code res/raw/saraswati_auth.pem} (see {@link TlsConfig}).
+ * <p>Base URL {@link ApiConfig#BASE_URL} over HTTPS with TLS 1.3 preferred and TLS 1.2 as the
+ * floor; the server certificate is pinned and the system CAs still apply (see
+ * {@link TlsConfig}). Requests carry the bearer access token via {@link AuthInterceptor} and
+ * a 401 triggers one refresh through {@link TokenAuthenticator}.
  *
  * <p>Call {@link #init(Context)} once from {@code Application.onCreate()} before any
- * {@link #getAuthApi()} usage.
+ * {@link #getAuthApi()} use.
  */
 public final class ApiClient {
 
     private static final String TAG = "ApiClient";
 
-    /**
-     * Dev server. On the Android emulator the host loopback is {@code 10.0.2.2}; when
-     * running against a device use {@code adb reverse tcp:8443 tcp:8443} so {@code localhost}
-     * resolves to the dev machine.
-     */
-    public static final String BASE_URL = "https://13.127.80.33:8443/";
-    private static final String HOST = "13.127.80.33";
-
     private static volatile AuthApiService authApi;
+
+    /** Invoked when the refresh token is rejected and the user has to sign in again. */
+    public interface SessionExpiredListener {
+        void onSessionExpired();
+    }
+
+    @Nullable
+    private static volatile SessionExpiredListener sessionExpiredListener;
 
     private ApiClient() { }
 
@@ -42,29 +48,38 @@ public final class ApiClient {
         }
         Context app = context.getApplicationContext();
         TlsConfig tls = TlsConfig.create(app);
-        Log.i(TAG, "Pinned auth cert: " + TlsConfig.describe(app));
+        Log.i(TAG, "auth-service " + ApiConfig.BASE_URL + " - trusted certificates: "
+                + TlsConfig.describe(app));
 
         SessionManager session = SessionManager.getInstance(app);
 
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        logging.redactHeader("Authorization");
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectionSpecs(Collections.singletonList(TlsConfig.TLS_1_3_ONLY))
+        OkHttpClient.Builder client = new OkHttpClient.Builder()
+                .connectionSpecs(Collections.singletonList(TlsConfig.MODERN_TLS_ONLY))
                 .sslSocketFactory(tls.sslContext().getSocketFactory(), tls.trustManager())
-                .hostnameVerifier(tls.hostnameVerifier(HOST))
+                .hostnameVerifier(tls.hostnameVerifier(ApiConfig.HOST))
                 .addInterceptor(new AuthInterceptor(session))
-                .authenticator(new TokenAuthenticator(session, ApiClient::getAuthApi))
-                .addInterceptor(logging)
-                .connectTimeout(30, TimeUnit.SECONDS)
+                .authenticator(new TokenAuthenticator(session, new TokenAuthenticator.ServiceProvider() {
+                    @Override
+                    public AuthApiService get() {
+                        return getAuthApi();
+                    }
+                }))
+                .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
-                .build();
+                .retryOnConnectionFailure(true);
+
+        if (BuildConfig.DEBUG) {
+            // Headers and bodies carry passwords and tokens, so only the request line is logged.
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+            logging.redactHeader("Authorization");
+            client.addInterceptor(logging);
+        }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
+                .baseUrl(ApiConfig.BASE_URL)
+                .client(client.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -75,9 +90,21 @@ public final class ApiClient {
         AuthApiService api = authApi;
         if (api == null) {
             throw new IllegalStateException(
-                    "ApiClient.init(context) must be called before getAuthApi() — "
-                    + "did you set android:name=\".SaraswatiApp\" in the manifest?");
+                    "ApiClient.init(context) must be called before getAuthApi() - "
+                            + "is android:name=\".SaraswatiApp\" still set in the manifest?");
         }
         return api;
+    }
+
+    public static void setSessionExpiredListener(@Nullable SessionExpiredListener listener) {
+        sessionExpiredListener = listener;
+    }
+
+    /** Called from {@link TokenAuthenticator} on a background thread. */
+    static void notifySessionExpired() {
+        SessionExpiredListener listener = sessionExpiredListener;
+        if (listener != null) {
+            listener.onSessionExpired();
+        }
     }
 }

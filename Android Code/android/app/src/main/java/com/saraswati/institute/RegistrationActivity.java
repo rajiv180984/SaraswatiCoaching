@@ -22,21 +22,21 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.saraswati.institute.network.ApiCallback;
 import com.saraswati.institute.network.ApiClient;
-import com.saraswati.institute.network.ApiResponse;
-import com.saraswati.institute.network.AuthResponse;
-import com.saraswati.institute.network.RegisterRequest;
+import com.saraswati.institute.network.ApiConfig;
+import com.saraswati.institute.network.ApiError;
+import com.saraswati.institute.network.AuthRequests;
+import com.saraswati.institute.network.RegistrationResponse;
 import com.saraswati.institute.network.SessionManager;
+import com.saraswati.institute.network.TokenResponse;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -66,9 +66,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private Button btnSubmit;
 
-    /** Backend password rule: 8+ chars with an upper, lower, digit and special (@$!%*?&). */
-    private static final Pattern PASSWORD_RULE = Pattern.compile(
-        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
+    /** The service's own password and username rules, checked before the round trip. */
+    private static final Pattern PASSWORD_RULE = Pattern.compile(ApiConfig.PASSWORD_REGEX);
+    private static final Pattern USERNAME_RULE = Pattern.compile(ApiConfig.USERNAME_REGEX);
 
     // ── Subject lists ──────────────────────────────────────
     private static final String[] SUBJECTS_6_10 = {
@@ -366,8 +366,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Username
         String username = textOf(etUsername);
-        if (username.length() < 3 || username.length() > 50) {
-            tilUsername.setError("Username must be 3–50 characters");
+        if (!USERNAME_RULE.matcher(username).matches()) {
+            tilUsername.setError(getString(R.string.registration_error_username));
             valid = false;
         } else {
             tilUsername.setError(null);
@@ -376,7 +376,7 @@ public class RegistrationActivity extends AppCompatActivity {
         // Password
         String password = passwordOf(etPassword);
         if (!PASSWORD_RULE.matcher(password).matches()) {
-            tilPassword.setError("Min 8 chars with upper, lower, digit & special (@$!%*?&)");
+            tilPassword.setError(getString(R.string.registration_error_password));
             valid = false;
         } else {
             tilPassword.setError(null);
@@ -466,72 +466,124 @@ public class RegistrationActivity extends AppCompatActivity {
 
     // ── Submission ─────────────────────────────────────────
 
+    /**
+     * Creates the account, then signs in.
+     *
+     * <p>{@code POST /api/v1/auth/register} answers 201 with the new profile and sends a
+     * verification email — it does <b>not</b> issue tokens. So a successful registration is
+     * followed by a normal {@code login} call with the same credentials. That login succeeds
+     * while the service runs with {@code app.security.require-email-verification=false}; once
+     * verification is enforced it answers 403 and the student is asked to confirm the address
+     * first, which {@link #showVerifyEmailDialog} explains.
+     */
     private void submitRegistration() {
-        RegisterRequest request = buildRegisterRequest();
+        final String username = textOf(etUsername);
+        final String password = passwordOf(etPassword);
 
-        btnSubmit.setEnabled(false);
-        btnSubmit.setText(R.string.registration_submitting);
-
-        ApiClient.getAuthApi().register(request).enqueue(new Callback<ApiResponse<AuthResponse>>() {
-            @Override
-            public void onResponse(Call<ApiResponse<AuthResponse>> call,
-                                   Response<ApiResponse<AuthResponse>> response) {
-                btnSubmit.setEnabled(true);
-                btnSubmit.setText(R.string.registration_submit);
-
-                ApiResponse<AuthResponse> body = response.body();
-                if (response.isSuccessful() && body != null && body.getData() != null) {
-                    // register returns JWT tokens — sign the student straight in
-                    SessionManager.getInstance(RegistrationActivity.this).saveSession(body.getData());
-                    showSuccessDialog();
-                } else if (response.code() == 400) {
-                    showToast(body != null && body.getMessage() != null
-                        ? body.getMessage()
-                        : "That email or username is already registered.");
-                } else {
-                    showToast("Registration failed (" + response.code() + "). Please try again.");
+        setSubmitting(true);
+        ApiClient.getAuthApi()
+            .register(new AuthRequests.Register(
+                username,
+                textOf(etEmail),
+                password,
+                firstNamePart(),
+                lastNamePart()))
+            .enqueue(new ApiCallback<RegistrationResponse>() {
+                @Override
+                public void onSuccess(RegistrationResponse body) {
+                    signIn(username, password);
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ApiResponse<AuthResponse>> call, Throwable t) {
-                btnSubmit.setEnabled(true);
-                btnSubmit.setText(R.string.registration_submit);
-                showToast("Could not reach the server: " + t.getMessage());
-            }
-        });
+                @Override
+                public void onError(ApiError error) {
+                    setSubmitting(false);
+                    showRegistrationError(error);
+                }
+            });
+    }
+
+    /** Signs the new student in so they land on the home screen already authenticated. */
+    private void signIn(String username, String password) {
+        ApiClient.getAuthApi()
+            .login(new AuthRequests.Login(username, password))
+            .enqueue(new ApiCallback<TokenResponse>() {
+                @Override
+                public void onSuccess(TokenResponse tokens) {
+                    setSubmitting(false);
+                    if (tokens != null && tokens.hasTokens()) {
+                        SessionManager.getInstance(RegistrationActivity.this).saveSession(tokens);
+                        showSuccessDialog();
+                    } else {
+                        showVerifyEmailDialog();
+                    }
+                }
+
+                @Override
+                public void onError(ApiError error) {
+                    setSubmitting(false);
+                    // The account exists either way; only the sign-in did not go through.
+                    if (error.isForbidden()) {
+                        showVerifyEmailDialog();
+                    } else {
+                        showCreatedButSignInFailedDialog(error.message());
+                    }
+                }
+            });
+    }
+
+    /** Reports a 409 on the field that caused it, and a 400 on each field the server named. */
+    private void showRegistrationError(ApiError error) {
+        if (error.isTransport()) {
+            showToast(error.message());
+            return;
+        }
+        if (error.isConflict()) {
+            String message = error.message();
+            TextInputLayout target =
+                message.toLowerCase(Locale.ROOT).contains("username") ? tilUsername : tilEmail;
+            target.setError(message);
+            target.requestFocus();
+            showToast(message);
+            return;
+        }
+        Map<String, String> fieldErrors = error.fieldErrors();
+        if (!fieldErrors.isEmpty()) {
+            applyFieldError(fieldErrors, "username", tilUsername);
+            applyFieldError(fieldErrors, "email", tilEmail);
+            applyFieldError(fieldErrors, "password", tilPassword);
+            applyFieldError(fieldErrors, "firstName", tilName);
+            applyFieldError(fieldErrors, "lastName", tilName);
+        }
+        showToast(error.message());
+    }
+
+    private void applyFieldError(Map<String, String> fieldErrors, String field, TextInputLayout layout) {
+        String message = fieldErrors.get(field);
+        if (message != null) {
+            layout.setError(message);
+        }
+    }
+
+    private void setSubmitting(boolean submitting) {
+        btnSubmit.setEnabled(!submitting);
+        btnSubmit.setText(submitting ? R.string.registration_submitting : R.string.registration_submit);
     }
 
     /**
-     * Maps the enrolment form onto the saraswati-auth account model. Only the fields the
-     * auth API accepts are sent (username / email / password / first &amp; last name / phone);
-     * the remaining academic details are collected for the coaching team separately.
+     * The service stores one first and one last name, so the single full-name field is split
+     * on the first space. Both parts stay within the 100-character server limit.
      */
-    private RegisterRequest buildRegisterRequest() {
+    private String firstNamePart() {
         String fullName = textOf(etName);
-        String firstName = fullName;
-        String lastName = "";
         int space = fullName.indexOf(' ');
-        if (space > 0) {
-            firstName = fullName.substring(0, space).trim();
-            lastName = fullName.substring(space + 1).trim();
-        }
-        if (lastName.isEmpty()) {
-            lastName = firstName;   // backend requires a non-blank last name
-        }
+        return space > 0 ? fullName.substring(0, space).trim() : fullName;
+    }
 
-        String phone = textOf(etMobile);
-        // backend phone pattern rejects "" but allows null (field is optional)
-        String phoneOrNull = phone.isEmpty() ? null : phone;
-
-        return new RegisterRequest(
-            textOf(etUsername),
-            textOf(etEmail),
-            passwordOf(etPassword),
-            firstName,
-            lastName,
-            phoneOrNull
-        );
+    private String lastNamePart() {
+        String fullName = textOf(etName);
+        int space = fullName.indexOf(' ');
+        // Optional on the server, so an empty remainder is simply left out.
+        return space > 0 ? fullName.substring(space + 1).trim() : null;
     }
 
     private String textOf(TextInputEditText et) {
@@ -562,19 +614,47 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void showSuccessDialog() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("Welcome to Saraswati!")
-            .setMessage("Your account has been created and you're now signed in.\n\n"
-                + "Our team will review the academic details you provided and contact you "
-                + "on the registered mobile number within 24–48 hours.")
-            .setPositiveButton("Continue", (dialog, which) -> {
-                android.content.Intent intent = new android.content.Intent(this, HomeActivity.class);
-                intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-                    | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            })
+            .setTitle(R.string.registration_success_title)
+            .setMessage(R.string.registration_success_message)
+            .setPositiveButton(R.string.registration_continue, (dialog, which) -> goHome())
             .setCancelable(false)
             .show();
+    }
+
+    /** The account was created but the address has to be confirmed before the first sign-in. */
+    private void showVerifyEmailDialog() {
+        new MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.registration_verify_title)
+            .setMessage(getString(R.string.registration_verify_message, textOf(etEmail)))
+            .setPositiveButton(R.string.registration_go_to_login, (dialog, which) -> goToLogin())
+            .setCancelable(false)
+            .show();
+    }
+
+    /** Registration went through but the follow-up sign-in did not; the login screen can retry. */
+    private void showCreatedButSignInFailedDialog(String reason) {
+        new MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.registration_created_title)
+            .setMessage(getString(R.string.registration_created_message, reason))
+            .setPositiveButton(R.string.registration_go_to_login, (dialog, which) -> goToLogin())
+            .setCancelable(false)
+            .show();
+    }
+
+    private void goHome() {
+        android.content.Intent intent = new android.content.Intent(this, HomeActivity.class);
+        intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+            | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void goToLogin() {
+        android.content.Intent intent = new android.content.Intent(this, LoginActivity.class);
+        intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+            | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     // ── Helpers ────────────────────────────────────────────

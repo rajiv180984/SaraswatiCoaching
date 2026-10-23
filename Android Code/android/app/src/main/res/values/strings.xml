@@ -10,8 +10,8 @@
     <string name="login_brand_title">Saraswati Institute</string>
     <string name="login_brand_subtitle">Coaching for Class 6 to 12</string>
     <string name="login_welcome">Welcome back</string>
-    <string name="login_subtitle">Sign in with your registered email and password</string>
-    <string name="login_email_label">Email address</string>
+    <string name="login_subtitle">Sign in with your username or registered email</string>
+    <string name="login_email_label">Username or email</string>
     <string name="login_password_label">Password</string>
     <string name="login_forgot_password">Forgot password?</string>
     <string name="login_sign_in">Sign in</string>
@@ -19,6 +19,18 @@
     <string name="login_create_account">Create an account</string>
     <string name="login_signing_in">Signing in…</string>
     <string name="login_error_email">Enter a valid email address</string>
+    <string name="login_error_identifier">Enter your username or email</string>
+    <string name="login_error_email_for_reset">Enter your registered email address to reset the password</string>
+    <string name="login_error_unexpected">Sign-in did not complete. Please try again.</string>
+    <string name="login_locked_title">Account locked</string>
+    <string name="login_blocked_title">Cannot sign in</string>
+    <string name="login_verify_title">Confirm your email</string>
+    <string name="login_verify_message">This account still needs its email address confirmed. Shall we send the verification link again?</string>
+    <string name="login_verify_message_username">This account still needs its email address confirmed. Sign in with your registered email address to have the link sent again.</string>
+    <string name="login_verify_resend">Resend link</string>
+    <string name="login_verify_sent">Verification link sent. Please check your inbox.</string>
+    <string name="login_reset_title">Reset password</string>
+    <string name="login_reset_sent">If that email is registered, a reset link has been sent.</string>
     <string name="login_error_password">Enter your password</string>
     <string name="login_help">Need help? Contact your branch</string>
 
@@ -160,6 +172,31 @@
     <!-- ============ Registration ============ -->
     <string name="registration_submit">Submit Registration</string>
     <string name="registration_submitting">Submitting…</string>
+    <string name="registration_continue">Continue</string>
+    <string name="registration_go_to_login">Go to sign in</string>
+    <string name="registration_error_username">3–50 characters: letters, digits, dot, underscore or hyphen</string>
+    <string name="registration_error_password">8–64 characters with no spaces, including upper case, lower case, a digit and a special character</string>
+    <string name="registration_success_title">Welcome to Saraswati!</string>
+    <string name="registration_success_message">Your account has been created and you are signed in.\n\nOur team will review the academic details you provided and contact you on the registered mobile number within 24–48 hours.</string>
+    <string name="registration_verify_title">Confirm your email</string>
+    <string name="registration_verify_message">Your account has been created. We have sent a verification link to %1$s — open it, then sign in.</string>
+    <string name="registration_created_title">Account created</string>
+    <string name="registration_created_message">Your account is ready, but signing in did not go through: %1$s\n\nPlease sign in from the login screen.</string>
+
+
+    <!-- ============ Password reset ============ -->
+    <string name="reset_title">Set a new password</string>
+    <string name="reset_subtitle">Paste the code from the reset email, then choose a new password. Signing in on your other devices will be required again.</string>
+    <string name="reset_token_label">Reset code from the email</string>
+    <string name="reset_new_password_label">New password</string>
+    <string name="reset_confirm_password_label">Confirm new password</string>
+    <string name="reset_submit">Reset password</string>
+    <string name="reset_submitting">Resetting…</string>
+    <string name="reset_error_token">Paste the reset code from the email</string>
+    <string name="reset_error_mismatch">Passwords do not match</string>
+    <string name="reset_done_title">Password changed</string>
+    <string name="reset_done_message">Your password has been reset. Please sign in with the new one.</string>
+    <string name="login_reset_enter_code">I have a reset code</string>
 
     <!-- Generic -->
     <string name="back">Back</string>

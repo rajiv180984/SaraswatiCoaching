@@ -9,8 +9,12 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Attaches {@code Authorization: Bearer <accessToken>} to every request except the
- * public auth endpoints (which must go out unauthenticated).
+ * Adds {@code Accept: application/json} to every request and
+ * {@code Authorization: <tokenType> <accessToken>} to the authenticated ones.
+ *
+ * <p>Everything under {@code /api/v1/auth/} is public and must go out unauthenticated:
+ * sending a stale bearer token to {@code refresh-token} or {@code login} would only invite
+ * a 401 from the filter chain before the endpoint is reached.
  */
 public class AuthInterceptor implements Interceptor {
 
@@ -24,28 +28,20 @@ public class AuthInterceptor implements Interceptor {
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request original = chain.request();
+        Request.Builder builder = original.newBuilder()
+                .header("Accept", "application/json");
 
-        String path = original.url().encodedPath();
-        if (isPublic(path)) {
-            return chain.proceed(original);
+        if (!isPublic(original.url().encodedPath())) {
+            String token = session.getAccessToken();
+            if (token != null && !token.isEmpty()) {
+                builder.header("Authorization", session.getTokenType() + " " + token);
+            }
         }
-
-        String token = session.getAccessToken();
-        if (token == null || token.isEmpty()) {
-            return chain.proceed(original);
-        }
-
-        Request authed = original.newBuilder()
-                .header("Authorization", "Bearer " + token)
-                .build();
-        return chain.proceed(authed);
+        return chain.proceed(builder.build());
     }
 
-    private static boolean isPublic(String path) {
-        return path.endsWith("/api/auth/login")
-                || path.endsWith("/api/auth/register")
-                || path.endsWith("/api/auth/refresh-token")
-                || path.endsWith("/api/auth/forgot-password")
-                || path.endsWith("/api/auth/reset-password");
+    /** Every endpoint the service exposes without authentication lives under one prefix. */
+    private static boolean isPublic(String encodedPath) {
+        return encodedPath.startsWith(ApiConfig.AUTH_PREFIX);
     }
 }
